@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+		<title>AStA-#{msg.newEvent}</title>
+		<link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" href="resources/shop.css" type="text/css" />
+</h:head>
+
+<h:body>
+		<div>
+				<ui:insert>
+						<ui:include src="/WEB-INF/templates/headermenubar.xhtml" />
+				</ui:insert>
+		</div>
+
+		<div id="content" style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
+				<h1>
+						<a style="color: maroon;">#{msg.newEvent}</a>
+				</h1>
+				<ui:insert name="content">
+						<h:form id="form">
+
+								<p:panel id="panel" header="#{msg.newEvent}">
+										<h:panelGrid columns="2">
+												<h:outputLabel value="#{msg.bezeichnung}:" for="bezeichnung" />
+												<h:panelGroup>
+														<p:inputText id="bezeichnung" value="#{eventController.saveEntity.bezeichnung}">
+																<f:converter converterId="eigenerConverter" />
+														</p:inputText>
+														<p:message for="bezeichnung" />
+												</h:panelGroup>
+
+												<h:outputLabel value="#{msg.beschreibung}:" for="beschreibung" />
+												<h:panelGroup>
+														<p:inputText id="beschreibung" value="#{eventController.saveEntity.beschreibung}">
+																<f:converter converterId="eigenerConverter" />
+														</p:inputText>
+														<p:message for="beschreibung" />
+												</h:panelGroup>
+
+												<h:outputLabel value="#{msg.place}:" for="place" />
+												<h:panelGroup>
+														<p:inputText id="place" value="#{eventController.saveEntity.place}">
+																<f:converter converterId="eigenerConverter" />
+														</p:inputText>
+														<p:message for="place" />
+												</h:panelGroup>
+
+												<h:outputLabel value="#{msg.date}:" for="date" />
+												<h:panelGroup>
+														<p:calendar style="padding-left: 45px;" id="date" value="#{eventController.saveEntity.date}" showOn="button" pattern="dd.MM.yyyy" />
+														<p:message for="date" />
+												</h:panelGroup>
+
+												<h:outputLabel value="#{msg.time}:" for="time" />
+												<h:panelGroup>
+														<p:calendar style="padding-left: 45px;" id="time" value="#{eventController.saveEntity.time}" showOn="button" pattern="dd.MM.yyyy" />
+														<p:message for="time" />
+												</h:panelGroup>
+								</p:panel>
+
+								<p:commandButton action="#{eventController.saveEvent()}" value="#{msg.save}" ajax="false" />
+								<p:commandButton action="allEvent.xhtml" value="#{msg.cancel}" immediate="true" />
+						</h:form>
+
+				</ui:insert>
+
+				<div class="push"></div>
+		</div>
+
+		<div>
+				<ui:insert>
+						<ui:include src="/WEB-INF/templates/footer.xhtml" />
+				</ui:insert>
+		</div>
+
+</h:body>
+</html>
