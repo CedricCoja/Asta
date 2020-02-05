@@ -39,13 +39,11 @@ public class Login extends LoginData {
     }
     return true;
   }
-
-  @Override
+  
   public void setPassword(String newPassword) {
     this.password = newPassword;
   }
 
-  @Override
   public boolean setPassword(String newPassword, String password) {
     // TODO Auto-generated method stub
     return false;

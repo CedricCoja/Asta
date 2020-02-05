@@ -60,8 +60,8 @@
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
 
-
     <dependencyManagement>
+	
         <dependencies>
             <!-- JBoss distributes a complete set of Java EE 7 APIs including a Bill
                 of Materials (BOM). A BOM specifies the versions of a "stack" (or a collection) 
@@ -78,6 +78,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			
             <dependency>
                 <groupId>org.wildfly.bom</groupId>
                 <artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
@@ -85,11 +86,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+		
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-
+			
         <!-- First declare the APIs we depend on and need for compilation. All 
             of them are provided by JBoss WildFly -->
 
@@ -196,6 +198,26 @@
             <scope>test</scope>
         </dependency>
 
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>7.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.extensions</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.8</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/javax.transaction/javax.transaction-api -->
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>javax.transaction-api</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
     </dependencies>
 
     <build>

@@ -3,6 +3,8 @@ package user;
 
 import java.io.Serializable;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "USER")
 
+@ManagedBean
+@SessionScoped
 public class User implements Serializable {
 
   private static final long serialVersionUID = 4467006451749712622L;
