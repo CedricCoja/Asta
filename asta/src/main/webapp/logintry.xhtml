@@ -18,7 +18,7 @@
 
 <h:body>
 	<div id="content">
-		<h:form>
+		<h:form id="login">
 			<p:growl id="growl" showDetail="true" sticky="true" />
 			<p:panelGrid styleClass="anmeldungGrid" columns="2" cellpadding="20">
 				<f:facet name="header"> #{msg.login} </f:facet>
@@ -29,7 +29,7 @@
 					<p:inputText id="email" required="true"
 						value="#{loginController.email}" requiredMessage="E-Mail fehlt">
 					</p:inputText>
-					<h:message for="email" styleClass="message" />
+					<p:message for="email" styleClass="message" display="icon"/>
 				</h:panelGroup>
 
 				<p:outputLabel value="#{msg.password}:" for="password" />
@@ -41,8 +41,11 @@
 			<br />
 
 			<p:commandButton value="#{msg.login}"
-				action="#{loginController.login()}" update="@form"/>
+				action="#{loginController.login()}"/>
+			<h:outputText value="#{loginController.email}"/>
 			<p:button value="#{msg.cancel}" outcome="index.xhtml"
+				immediate="true" />
+			<p:button value="#{msg.register}" outcome="register.xhtml"
 				immediate="true" />
 			<br></br>
 			<br></br>
