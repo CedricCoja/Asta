@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+	<title>AStA-#{msg.login}</title>
+	<link href="https://fonts.googleapis.com/css?family=Jura"
+		rel="stylesheet" type="text/css" />
+	<!-- <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
+</h:head>
+
+<h:body>
+	<div id="content">
+		<h:form>
+			<p:growl id="growl" showDetail="true" sticky="true" />
+			<p:panelGrid styleClass="anmeldungGrid" columns="2" cellpadding="20">
+				<f:facet name="header"> #{msg.login} </f:facet>
+
+				<p:outputLabel value="#{msg.email}:" for="email" />
+
+				<h:panelGroup>
+					<p:inputText id="email" required="true"
+						value="#{loginController.email}" requiredMessage="E-Mail fehlt">
+					</p:inputText>
+					<h:message for="email" styleClass="message" />
+				</h:panelGroup>
+
+				<p:outputLabel value="#{msg.password}:" for="password" />
+				<h:panelGroup>
+					<p:password id="password" value="#{loginController.password}"
+						required="true" />
+				</h:panelGroup>
+			</p:panelGrid>
+			<br />
+
+			<p:commandButton value="#{msg.login}"
+				action="#{loginController.login()}" update="@form"/>
+			<p:button value="#{msg.cancel}" outcome="index.xhtml"
+				immediate="true" />
+			<br></br>
+			<br></br>
+		</h:form>
+	</div>
+</h:body>
+</html>

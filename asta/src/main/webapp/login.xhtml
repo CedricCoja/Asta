@@ -33,28 +33,28 @@
         <p:outputLabel value="#{msg.email}:" for="email" />
         <h:panelGroup>
           <p:inputText id="email" required="true"
-            value="#{userController.email}" requiredMessage="E-Mail fehlt">
-                        <f:converter converterId="eigenerConverter" />
+            value="#{loginController.password}" requiredMessage="E-Mail fehlt">
+                        <!-- <f:converter converterId="eigenerConverter" /> -->
           </p:inputText>
           <h:message for="email" styleClass="message" />
         </h:panelGroup>
 
         <p:outputLabel value="#{msg.password}:" for="password" />
         <h:panelGroup>
-          <p:password id="password" value="#{userController.password}"
-            required="true" />
+          <p:password id="password" value="#{loginController.password}"
+            required="true"/>
         </h:panelGroup>
       </p:panelGrid>
       <br />
 
-      <p:commandButton value="#{msg.login}" action="#{userController.login}"
+      <p:commandButton value="#{msg.login}" action="#{loginController.login()}"
         ajax="false" />
       <p:button value="#{msg.cancel}" outcome="index.xhtml" immediate="true" />
-      <br></br>
+      <!-- <br></br>
       <br></br>
       <a
         style="color: black; font-family: Jura, sans-serif; font-size: 17px"
-        href="register.xhtml" onclick="#{userController.newUser()}"> #{msg.register} </a>
+        href="register.xhtml" onclick="#{userController.newUser()}"> #{msg.register} </a> -->
     </h:form>
     <div class="push"></div>
   </div>
@@ -62,7 +62,7 @@
 
   <div>
     <ui:insert>
-      <ui:include src="/WEB-INF/templates/footer.xhtml" />
+      <!-- <ui:include src="/WEB-INF/templates/footer.xhtml" />  -->
     </ui:insert>
   </div>
 </h:body>

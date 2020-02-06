@@ -17,9 +17,6 @@ import javax.validation.constraints.Size;
 @NamedQuery(name = "SelectUser", query = "Select u from User u")
 @Entity
 @Table(name = "USER")
-
-@ManagedBean
-@SessionScoped
 public class User implements Serializable {
 
   private static final long serialVersionUID = 4467006451749712622L;

@@ -1,4 +1,4 @@
-/*
+
 package user;
 
 public abstract class Login extends LoginData {
@@ -49,4 +49,3 @@ public abstract class Login extends LoginData {
     return false;
   }
 }
-*/
