@@ -1,4 +1,4 @@
-<!--  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -8,16 +8,22 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title><ui:insert name="title">#{msg.home}</ui:insert></title>
-	<h:outputStylesheet name="css/home.css"></h:outputStylesheet>
-	<ul id="navigation">
-<li><a href="#" title="Feten">Feten</a></li>
-<li><a href="#" title="Events">Events</a></li>
-<li><a href="#" title="Mein Bereich">Mein Bereich</a></li>
-<li><a href="#" title="Abmelden">Abmelden</a></li>
-</ul>
+	<h:outputStylesheet libery="css" name="home.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-
+<div class="w3-right w3-hide-small">
+						<h:commandButton class="w3-bar-item w3-button"
+							action="#{Usercontroller.addEvent(EventController, UserController.user)}"
+							value="#{msg.Veranstaltung}" />
+						<h:commandButton class="w3-bar-item w3-button"
+							action="#{UserController.showFeten()}"
+							value="#{msg.Feten}" />
+						<h:commandButton class="w3-bar-item w3-button"
+							action="#{UserController.showProfil(ProfilController, UserController.user)}"
+							value="#{msg.profil}" />
+						<h:commandButton class="w3-bar-item w3-button"
+							action="#{LoginController.logout()}"
+							value="#{msg.logout}" />
+					</div>
 </h:body>
 </html>
--->
