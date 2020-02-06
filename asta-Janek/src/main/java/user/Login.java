@@ -1,4 +1,4 @@
-
+/*
 package user;
 
 public class Login extends LoginData {
@@ -49,3 +49,4 @@ public class Login extends LoginData {
     return false;
   }
 }
+*/
