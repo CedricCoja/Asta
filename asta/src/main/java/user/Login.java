@@ -1,12 +1,12 @@
 /*
 package user;
 
-public class Login extends LoginData {
+public abstract class Login extends LoginData {
   private String passwordExtension;
   private byte[] passwordHash;
   private String hashMethode;
   private String password;
-
+/*
   public Login(String password) {
     StringBuilder buildAddToPassword = new StringBuilder(LoginData.NORMALLENGTH);
     for (int i = 0; i < LoginData.NORMALLENGTH; ++i) {
@@ -30,7 +30,7 @@ public class Login extends LoginData {
     }
     return true;
   }
-
+*/
   private boolean match(byte[] match, byte[] with) {
     for (int i = 0; i < match.length; ++i) {
       if (match[i] != with[i]) {
