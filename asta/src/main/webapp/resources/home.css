@@ -3,4 +3,15 @@ body {
 	color: #FFFFFF;
 	front-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
+	
 }
+.center{
+	text-align: center;
+}
+.background{
+	background-image: url("C:\Users\Louna\Documents\Hochschule\ProjektSWE\Asta\asta\src\main\webapp\resources\image\h1.jpg");
+	background-repeat: no-repeat;
+	background-position: top center;
+	
+}
+	
