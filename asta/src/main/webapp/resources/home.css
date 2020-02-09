@@ -3,11 +3,14 @@ body {
 	color: #FFFFFF;
 	front-size: 12px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-image: url("../resources/image/h1.png");
-	background-size: cover;
+	background-image: url("../resources/image/h2.png");
+	background-size:1400px;
 	background-position: top center;
+	background-repeat: no-repeat;
 }
 .center{
 	text-align: center;
+	width: 1400px;
+	height: 312px;
 }
 
