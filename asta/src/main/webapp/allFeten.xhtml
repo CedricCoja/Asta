@@ -6,8 +6,75 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-<head>
+<h:head>
+	<title>Feten - Tickets</title>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
+		type="text/css" />
+	<h:form class="ul">
+		<p:menubar>
+			<p:menuitem value="Events anmelden" icon="pi pi-file" />
+			<p:menuitem value="Feten - Tickets" icon="pi pi-pencil" />
+			<p:submenu label="Mein Bereich" icon="pi pi-question">
+				<p:menuitem value="Profil" url="#" />
+				<p:menuitem value="Meine Bestellungen" url="#" />
+			</p:submenu>
+			<p:menuitem value="Über Uns" icon="pi pi-cog" />
+			<f:facet name="options">
+				<p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search" />
+				<p:commandButton type="button" value="Logout" icon="pi pi-home" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+</h:head>
 <body>
+	<h1 class="center">
+		Feten - Tickets
+		<h3>Hier könnt ihr eure Tickets für die Hochschulfeten erwerben.
+		</h3>
+	</h1>
+	<hr />
+	<div id="box_1">
+		<h2 class="text">Veranstaltung 1</h2>
+		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg" alt="Platzhalter" />
+		<p>
+			Datum:<br /> <br /> Uhrzeit:<br /> <br /> Ort:
+		</p>
+		<ul>
+			<a href="#" class="myButton">Tickets</a>
+		</ul>
+	</div>
+	<!--//end #box_1//-->
+	<div id="box_2">
+		<h2 class="text">Veranstaltung 2</h2>
+		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg" alt="Platzhalter" />
+		<p>
+			Datum:<br /> <br /> Uhrzeit:<br /> <br /> Ort:
+		</p>
+		<ul>
+			<a href="#" class="myButton">Tickets</a>
+		</ul>
+	</div>
+	<!--//end #box_2//-->
+	<div id="box_3">
+		<h2 class="text">Veranstaltung 3</h2>
+		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg" alt="Platzhalter" />
+		<p>Datum:<br /> <br /> Uhrzeit:<br /> <br /> Ort:
+		</p>
+		<ul>
+			<a href="#" class="myButton">Tickets</a>
+		</ul>
+	</div>
+	<!--//end #box_3//-->
+	<div id="box_4">
+		<h2 class="text">Veranstaltung 4</h2>
+		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg" alt="Platzhalter" />
+		<p>
+			Datum:<br /> <br /> Uhrzeit:<br /> <br /> Ort:
+		</p>
+		<ul>
+			<a href="#" class="myButton">Tickets</a>
+		</ul>
+	</div>
+	<!--//end #box_4//-->
 </body>
-</head>
 </html>
