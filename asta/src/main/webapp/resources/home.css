@@ -1,39 +1,50 @@
 body {
 	background-color: #000000;
 	color: #FFFFFF;
-	front-size: 12px;
+	font-size: 16px;
 	font-family: Open Sans;
-	background-image: url("../resources/image/h2.png");
-	background-size: 1400px;
+	background-image: url("../resources/image/background.png");
+	background-size: cover;
 	background-position: top center;
 	background-repeat: no-repeat;
-	background-attachment:fixed;
+	background-attachment: fixed;
 }
-
 .center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+.centerHome {
 
-.header {
-	front: 35px;
-}
-
--
-.text {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	text-align: top center;
-	front: 6px;
-	color: #000000;
+	height: 350px;
+	text-shadow: 0.1em 0.1em 0.2em black;
+	font-size: 50px;
+}
+
+.text {
+	display: flex;
+	justify-content: center;
+	vertical-align: center;
+	text-shadow: 0.1em 0.1em 0.2em black;
+}
+.textHome {
+	height: 450px;
+	display: flex;
+	justify-content: center;
+	vertical-align: center;
+	text-shadow: 0.1em 0.1em 0.2em black;
+}
+.picture{
+	border:1px solid grey;
 }
 /* Button */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 .container, .first, .second {
-	position: relative;
+	position: absolute;
 }
 
 .container {
@@ -94,64 +105,7 @@ body {
 }
 
 }
-/*Boxen */
-#header {
-	color: #000000;
-	font-family: Open Sans;
-	margin: 0 -1em 0 -1em;
-	padding: 0 0 0 0;
-	height: 143px;
-	margin: 0 -1em 0 -1em;
-}
-
-#cell_1 p, #cell_2 p, #cell_3 p {
-	font-size: .75em;
-	color: #000000;
-}
-
-#cell_1 h2 {
-	margin: 0 0 -4px 0 !important;
-	margin: 0 0 -20px 0;
-	padding: 4px 0 10px 0;
-	font-family: Open Sans;
-	color: #000000;
-	font-weight: bold;
-}
-
-#cell_2 h2 {
-	margin: 0 0 -4px 0 !important;
-	margin: 0 0 -20px 0;
-	padding: 4px 0 10px 0;
-	font-family: Open Sans;
-	color: #000000;
-	font-weight: bold;
-}
-
-#cell_3 h2 {
-	margin: 0 0 -4px 0 !important;
-	margin: 0 0 -20px 0;
-	padding: 4px 0 10px 0;
-	font-family: Open Sans;
-	color: #000000;
-	font-weight: bold;
-}
-
-.barepic {
-	border: none;
-}
-
-.right {
-	float: right;
-	margin: 5px;
-	padding: 2px;
-}
-
-.left {
-	float: left;
-	margin: 5px;
-	padding: 2px;
-}
-
+/* Boxen */
 #box_1 {
 	margin: 0 5px 2em 35px;
 	box-shadow: 10px 10px 15px black, 6px 6px 10px hsla(300, 15%, 25%, 0.3)
@@ -162,68 +116,161 @@ body {
 	width: 200px;
 	background-color: #cccccc;
 	transition: box-shadow 0.75s;
+	color: #585858;
+	border-radius: 5px;
 }
 
 #box_2 {
 	margin: 0 7px 2em 35px;
-	box-shadow: 10px 10px 15px black, 6px 6px 10px
-		hsla(300, 15%, 25%, 0.3)inset;
+	box-shadow: 10px 10px 15px black, 6px 6px 10px hsla(300, 15%, 25%, 0.3)
+		inset;
 	padding: 65px;
 	float: left;
 	width: 200px;
 	background-color: #cccccc;
 	transition: box-shadow 0.75s;
+	color: #585858;
+	border-radius: 5px;
 }
 
 #box_3 {
 	margin: 0 14px 2em 35px;
-box-shadow: 10px 10px 15px black, 6px 6px 10px
-		hsla(300, 15%, 25%, 0.3)inset;
+	box-shadow: 10px 10px 15px black, 6px 6px 10px hsla(300, 15%, 25%, 0.3)
+		inset;
 	padding: 65px;
 	float: left;
 	width: 200px;
 	background-color: #cccccc;
 	transition: box-shadow 0.75s;
+	color: #585858;
+	border-radius: 5px;
 }
 
 #box_4 {
 	margin: 0 0 2em 35px;
-box-shadow: 10px 10px 15px black, 6px 6px 10px
-		hsla(300, 15%, 25%, 0.3)inset;
+	box-shadow: 10px 10px 15px black, 6px 6px 10px hsla(300, 15%, 25%, 0.3)
+		inset;
 	padding: 65px;
 	float: left;
 	width: 200px;
 	background-color: #cccccc;
 	transition: box-shadow 0.75s;
+	color: #585858;
+	border-radius: 5px;
 }
-
 
 /*Ticketbutton für die Veranstaltungen */
 .myButton {
-box-shadow: 3px 3px 6px black, 6px 6px 10px
-		hsla(300, 15%, 25%, 0.3)inset;
-	background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
-	background-color: #ededed;
-	border-radius: 7px;
-	border: 1px solid #dcdcdc;
 	display: inline-block;
 	cursor: pointer;
-	color: #777777;
-	font-family: Arial;
-	font-size: 15px;
-	font-weight: bold;
-	padding: 6px 24px;
-	text-decoration: none;
-	text-shadow: 0px 1px 0px #ffffff;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	transition: all 0.2s ease-in-out;
+	font-size: 17px;
+	color: #FFF;
+	letter-spacing: 2px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	border: 2px solid #FFF;
+	transition: all 0.3s ease;
+	border-radius: 5px;
 	position: top center;
 }
-
-.myButton:hover {
-	background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
-	background-color: #dfdfdf;
+/* MenuBar */
+nav {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #000000;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,1);
+}
+nav a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+}
+ 
+nav li {
+  display: inline-block;
+  color: #fff;
+  list-style: none;
+  transition: 0.5s;
 }
 
-.myButton:active {
-	position: center;
-	top: 1px;
+nav > ul {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+nav > ul > li > a {
+  padding: 15px 25px;
+}
+
+nav ul > li.submenu > a:after {
+  position: relative;
+  float: right;
+  content: '';
+  margin-left: 10px;
+  margin-top: 8px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #fff;
+  border-bottom: 5px solid transparent;
+}
+
+nav ul > li.submenu:hover > a:after {
+  margin-top: 2px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+}
+
+nav > ul > li:hover {
+  background: #4096ee;
+}
+
+nav ul.megamenu {
+  position: absolute;
+  width: 800px;
+  top: -9999px;
+  left: 0;
+  padding: 40px 40px 0 40px;
+  background: #fff;
+  text-align: left;
+  border-top: 5px solid #4096ee;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+nav ul li:hover ul.megamenu {
+  top: 100%;
+}
+
+nav .megamenu ul {
+  margin-bottom: 40px;
+}
+
+nav .megamenu li {
+  display: block;
+}
+
+nav .megamenu li a {
+  margin-top: 10px;
+  transition: 0.5s;
+  color: #000;
+}
+
+nav .megamenu li a:hover {
+  color: #4096ee;
+}
+
+nav .megamenu h4 {
+  margin-bottom: 15px;
+  color: #000;
+  text-transform: uppercase;
 }
