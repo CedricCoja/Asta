@@ -41,8 +41,7 @@
 			<br />
 
 			<p:commandButton value="#{msg.login}"
-				action="#{loginController.login()}"/>
-			<h:outputText value="#{loginController.email}"/>
+				action="#{loginController.login()}" ajax="false"/>
 			<p:button value="#{msg.cancel}" outcome="index.xhtml"
 				immediate="true" />
 			<p:button value="#{msg.register}" outcome="register.xhtml"

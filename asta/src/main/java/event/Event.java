@@ -7,18 +7,24 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
 import ticket.Ticket;
 
+@NamedQuery(name = "SelectEvent", query = "Select e from Event e")
+@Entity
+@Table(name = "EVENT")
 public class Event implements Serializable {
 
   private static final long serialVersionUID = 4031966842159109874L;
@@ -51,16 +57,16 @@ public class Event implements Serializable {
   @JoinColumn(name = "ticketid", nullable = false)
   private List<Ticket> ticket;
 
-  public Event() {
-  }
-
   public Event(String bezeichnung, String beschreibung, String place, Date date, String time) {
-
     this.bezeichnung = bezeichnung;
     this.beschreibung = beschreibung;
     this.place = place;
     this.date = date;
     this.time = time;
+  }
+
+  public Event() {
+    //
   }
 
   public Integer getEventID() {

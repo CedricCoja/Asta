@@ -3,8 +3,6 @@ package user;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,14 +21,14 @@ public class User implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "User_ID", nullable = false, unique = true)
+  @Column(name = "UserID", nullable = false, unique = true)
   private Integer userID;
 
   @Column(name = "Rolle")
-  private String role;
+  private Role role = Role.USER;
 
   @Column(name = "Status")
-  private String status;
+  private Status status;
 
   @Size(min = 3, max = 20)
   @Column(name = "Vorname")
@@ -40,25 +38,31 @@ public class User implements Serializable {
   @Column(name = "Nachname")
   private String lastName;
 
-  @Size(min = 3, max = 20)
-  @Column(name = "E-Mail")
+  @Size(min = 3, max = 40)
+  @Column(name = "EMail")
   private String email;
 
   @Size(min = 3, max = 20)
   @Column(name = "Passwort")
   private String password;
 
-  //  private boolean student;
+  private String statuspruefung = "hs-bremerhaven.de";
 
-  //  private LoginData loginData;
-  //
-  //  public LoginData getLoginData() {
-  //    return loginData;
-  //  }
-  //
-  //  public void setLoginData(LoginData loginData) {
-  //    this.loginData = loginData;
-  //  }
+  public User() {
+  }
+
+  public User(String firstName, String lastName, String email, String password) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.email = email;
+    this.password = password;
+    if (email.contains(statuspruefung)) {
+      this.status = Status.STUDENT;
+    } else {
+      this.status = Status.EXTERN;
+    }
+    this.role = Role.ADMIN;
+  }
 
   public Integer getId() {
     return userID;
@@ -68,11 +72,11 @@ public class User implements Serializable {
     this.userID = id;
   }
 
-  public String getRole() {
+  public Role getRole() {
     return role;
   }
 
-  public void setRole(String role) {
+  public void setRole(Role role) {
     this.role = role;
   }
 
@@ -98,21 +102,34 @@ public class User implements Serializable {
 
   public void setEmail(String email) {
     this.email = email;
+    if (email.contains(statuspruefung)) {
+      this.status = Status.STUDENT;
+    } else {
+      this.status = Status.EXTERN;
+    }
   }
 
-  //  public boolean isStudent() {
-  //    return student;
-  //  }
-  //
-  //  public void setStudent(boolean student) {
-  //    this.student = student;
-  //  }
-
-  public String getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(Status status) {
     this.status = status;
+  }
+
+  public Integer getUserID() {
+    return userID;
+  }
+
+  public void setUserID(Integer userID) {
+    this.userID = userID;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

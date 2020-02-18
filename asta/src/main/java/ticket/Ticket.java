@@ -14,9 +14,7 @@ import javax.persistence.Table;
 @NamedQuery(name = "SelectTicket", query = "Select t from Ticket t")
 @Entity
 @Table(name = "TICKET")
-
 public class Ticket implements Serializable {
-
   private static final long serialVersionUID = 7719675659305229219L;
 
   @Id

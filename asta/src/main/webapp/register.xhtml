@@ -10,7 +10,7 @@
 
 <!-- <f:view locale="en"> -->
 <h:head>
-  <title>AStA-#{msg.registrieren}</title>
+  <title>AStA-#{msg.register}</title>
   <link href="https://fonts.googleapis.com/css?family=Jura"
     rel="stylesheet" type="text/css" />
   <!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
@@ -27,7 +27,7 @@
     <ui:insert name="content">
       <h:form id="form">
         <p:growl id="growl" showDetail="true" sticky="true" />
-        <p:panelGrid var="user" value="#{userController.user}"
+        <p:panelGrid var="user" value="#{userController.users}"
           styleClass="loginGrid" columns="2" cellpadding="20">
                   <f:facet name="header">#{msg.register}</f:facet>
 
@@ -36,7 +36,6 @@
             <p:inputText id="firstName" required="true"
               value="#{userController.saveEntity.firstName}"
               requiredMessage="Vorname fehlt">
-                          <f:converter converterId="eigenerConverter" />
             </p:inputText>
             <h:message for="firstName" styleClass="message" />
           </h:panelGroup>
@@ -46,7 +45,6 @@
             <p:inputText id="lastName" required="true"
               value="#{userController.saveEntity.lastName}"
               requiredMessage="Nachname fehlt">
-                          <f:converter converterId="eigenerConverter" />
             </p:inputText>
             <h:message for="lastName" styleClass="message" />
           </h:panelGroup>
@@ -56,7 +54,6 @@
             <p:inputText id="email" required="true"
               value="#{userController.saveEntity.email}"
               requiredMessage="E-Mail fehlt">
-                          <f:converter converterId="eigenerConverter" />
             </p:inputText>
             <h:message for="email" styleClass="message" />
           </h:panelGroup>

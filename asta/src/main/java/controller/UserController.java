@@ -9,13 +9,10 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.RollbackException;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-import javax.ws.rs.NotSupportedException;
-
-import org.omg.CORBA.SystemException;
 
 import user.User;
 
@@ -23,87 +20,92 @@ import user.User;
 @SessionScoped
 public class UserController {
 
-	@PersistenceContext
-	private EntityManager em;
+  @PersistenceContext
+  private EntityManager em;
 
-	@Resource
-	private UserTransaction utx;
+  @Resource
+  private UserTransaction utx;
 
-	private DataModel<User> user;
-	private User saveEntity = new User();
+  private DataModel<User> users;
+  private User saveEntity = new User();
 
-	@PostConstruct
-	public void init() {
-		try {
-			utx.begin();
-		} catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-			e.printStackTrace();
-		}
-		user = new ListDataModel<User>();
-		user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+  @PostConstruct
+  public void init() throws Throwable, SystemException {
+    utx.begin();
 
-		try {
-			try {
-				utx.commit();
-			} catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-				e.printStackTrace();
-			}
-		} catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-			e.printStackTrace();
-		}
+    em.persist(new User("Janek", "Bredehöft", "bredehoeft.janek@gmail.com", "hallo123"));
+    em.persist(new User("Cedric", "Coja", "ceddyderteddy@poposex.com", "schalke04"));
+    em.persist(new User("Louna", "Fehder", "lfehder@hs-bremerhaven.de", "passwort"));
 
-	}
+    users = new ListDataModel<User>();
 
-	public String newUser() {
-		saveEntity = new User();
-		return "registrieren";
-	}
+    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+    utx.commit();
+  }
 
-	public String register() {
-		try {
-			utx.begin();
-			saveEntity = em.merge(saveEntity);
-			em.persist(saveEntity);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException
-				| SystemException | NotSupportedException | HeuristicMixedException
-				| javax.transaction.NotSupportedException | javax.transaction.SystemException
-				| javax.transaction.RollbackException e) {
-			e.printStackTrace();
-		}
-		return "login";
-	}
+  public String newUser() {
+    saveEntity = new User();
+    return "registrieren";
+  }
 
-	public String saveUser() {
-		try {
-			utx.begin();
-			saveEntity = em.merge(saveEntity);
-			em.persist(saveEntity);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException
-				| SystemException | NotSupportedException | HeuristicMixedException
-				| javax.transaction.NotSupportedException | javax.transaction.SystemException
-				| javax.transaction.RollbackException e) {
-			e.printStackTrace();
-		}
-		return "allUser";
-	}
+  public String register() throws Throwable, SystemException {
+    utx.begin();
+    saveEntity = em.merge(saveEntity);
+    em.persist(saveEntity);
+    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+    utx.commit();
+    return "logintry";
+  }
 
-	public String saveProfil() {
-		try {
-			utx.begin();
-			saveEntity = em.merge(saveEntity);
-			em.persist(saveEntity);
-			user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-			utx.commit();
-		} catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException
-				| SystemException | NotSupportedException | HeuristicMixedException
-				| javax.transaction.NotSupportedException | javax.transaction.SystemException
-				| javax.transaction.RollbackException e) {
-			e.printStackTrace();
-		}
-		return "index";
-	}
+  public String delete() throws Throwable, SystemException {
+    saveEntity = users.getRowData();
+    utx.begin();
+    saveEntity = em.merge(saveEntity);
+    em.remove(saveEntity);
+    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+    return "index";
+  }
+
+  public DataModel<User> getUsers() {
+    return users;
+  }
+
+  public void setUsers(DataModel<User> users) {
+    this.users = users;
+  }
+
+  public User getSaveEntity() {
+    return saveEntity;
+  }
+
+  public void setSaveEntity(User saveEntity) {
+    this.saveEntity = saveEntity;
+  }
+
+  //  public String saveUser() {
+  //    try {
+  //      utx.begin();
+  //      saveEntity = em.merge(saveEntity);
+  //      em.persist(saveEntity);
+  //      user.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+  //      utx.commit();
+  //    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+  //      e.printStackTrace();
+  //    }
+  //    return "allUser";
+  //  }
+
+  public String saveProfil() {
+    try {
+      utx.begin();
+      saveEntity = em.merge(saveEntity);
+      em.persist(saveEntity);
+      users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+      utx.commit();
+    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+      e.printStackTrace();
+    }
+    return "profil";
+  }
+
 }

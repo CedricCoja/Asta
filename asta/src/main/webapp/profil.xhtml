@@ -11,12 +11,6 @@
 </h:head>
 
 <h:body>
-		<div>
-				<ui:insert>
-						<ui:include src="/WEB-INF/templates/headermenubar.xhtml" />
-				</ui:insert>
-		</div>
-
 
 		<div id="content" style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
 				<h1>
@@ -28,48 +22,43 @@
 						<p:growl showDetail="true" />
 						<p:panel id="panel" header="#{msg.userDaten}">
 								<h:panelGrid columns="2">
-
 										<h:outputLabel value="#{msg.firstName}" for="firstName" />
+										<h:outputText value="#{loginController.user.firstName}" />
+										<h:outputLabel value="#{msg.newFirstName}" for="newFirstName" />
 										<h:panelGroup>
-												<p:inputText id="firstName" required="true" requiredMessage="Vorname fehlt" value="#{userController.user.firstName}">
-														<f:converter converterId="eigenerConverter" />
+												<p:inputText id="firstName" required="false" requiredMessage="Vorname fehlt" value="#{userController.saveEntity.firstName}">
 												</p:inputText>
 												<h:message for="Vorname" styleClass="message" />
 										</h:panelGroup>
-
+										
 										<h:outputLabel value="#{msg.lastName}" for="lastName" />
+										<h:outputText value="#{loginController.user.lastName}" />
+										<h:outputLabel value="#{msg.newLastName}" for="newLastName" />
 										<h:panelGroup>
-												<p:inputText id="lastName" value="#{userController.user.lastName}" required="true" requiredMessage="Nachname fehlt">
-														<f:converter converterId="eigenerConverter" />
+												<p:inputText id="lastName" required="false" requiredMessage="Nachname fehlt" value="#{userController.saveEntity.lastName}">
 												</p:inputText>
 												<h:message for="Nachname" styleClass="message" />
 										</h:panelGroup>
-
+										
 										<h:outputLabel value="#{msg.email}" for="email" />
+										<h:outputText value="#{loginController.user.email}" />
+										<h:outputLabel value="#{msg.newEmail}" for="newEmail" />
 										<h:panelGroup>
-												<p:inputText id="email" required="true" requiredMessage="E-mail fehlt" value="#{userController.user.email}">
-														<f:converter converterId="eigenerConverter" />
+												<p:inputText id="email" required="false" requiredMessage="E-mail fehlt" value="#{userController.saveEntity.email}">
 												</p:inputText>
 												<h:message for="email" styleClass="message" />
 										</h:panelGroup>
+								</h:panelGrid>
+								<br></br>
 
-										<br></br>
+								<p:commandButton action="#{userController.saveProfil()}" value="#{msg.save}" ajax="false" />
 
-										<p:commandButton action="#{userController.saveProfil()}" value="#{msg.save}" ajax="false" />
-
-										<p:commandButton action="index.xhtml" value="#{msg.cancel}" update="@(form)" />
+								<p:commandButton action="index.xhtml" value="#{msg.cancel}" update="@(form)" />
 						</p:panel>
 				</h:form>
 
 				<div class="push"></div>
 		</div>
 
-
-
-		<div>
-				<ui:insert>
-						<ui:include src="/WEB-INF/templates/footer.xhtml" />
-				</ui:insert>
-		</div>
 </h:body>
 </html>

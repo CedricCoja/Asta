@@ -14,7 +14,7 @@
 		</div>
 		<div id="content">
 				<ui:insert name="content">
-						<h:dataTable var="user" value="#{userController.userList}" rowClasses="odd,even" headerClass="header">
+						<h:dataTable var="user" value="#{userController.users}" rowClasses="odd,even" headerClass="header">
 								<f:facet name="header">Nutzer</f:facet>
 								<h:column>
 										<f:facet name="header">Vorname</f:facet>
@@ -29,8 +29,16 @@
 										<h:outputText value="#{user.email}" />
 								</h:column>
 								<h:column>
+										<f:facet name="header">Passwort</f:facet>
+										<h:outputText value="#{user.password}" />
+								</h:column>
+								<h:column>
 										<f:facet name="header">Status</f:facet>
 										<h:outputText value="#{user.status}" />
+								</h:column>
+								<h:column>
+										<f:facet name="header">Rolle</f:facet>
+										<h:outputText value="#{user.role}" />
 								</h:column>
 						</h:dataTable>
 				</ui:insert>

@@ -23,6 +23,16 @@
   <managed-bean-class>controller.UserController</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>loginController</managed-bean-name>
+  <managed-bean-class>controller.LoginController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>eventController</managed-bean-name>
+  <managed-bean-class>controller.EventController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <application>
   <locale-config>
    <default-locale>de</default-locale>
