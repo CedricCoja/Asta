@@ -9,6 +9,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.RollbackException;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.SystemException;
@@ -62,12 +63,17 @@ public class UserController {
     return "registrieren";
   }
 
-  public String register() throws Throwable, SystemException {
-    utx.begin();
-    saveEntity = em.merge(saveEntity);
-    em.persist(saveEntity);
-    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-    utx.commit();
+  public String register() {
+    try {
+      utx.begin();
+      System.out.println(saveEntity);
+      saveEntity = em.merge(saveEntity);
+      em.persist(saveEntity);
+      users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+      utx.commit();
+    } catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+      e.printStackTrace();
+    }
     return "logintry";
   }
 

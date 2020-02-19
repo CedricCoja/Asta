@@ -39,7 +39,7 @@ public class User implements Serializable {
   private String lastName;
 
   @Size(min = 3, max = 40)
-  @Column(name = "EMail")
+  @Column(name = "EMail", unique = true)
   private String email;
 
   @Size(min = 3, max = 20)

@@ -54,6 +54,7 @@
             <p:inputText id="email" required="true"
               value="#{userController.saveEntity.email}"
               requiredMessage="E-Mail fehlt">
+              <f:validator validatorId="myValidator"/>
             </p:inputText>
             <h:message for="email" styleClass="message" />
           </h:panelGroup>

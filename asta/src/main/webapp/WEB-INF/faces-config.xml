@@ -33,6 +33,10 @@
   <managed-bean-class>controller.EventController</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <validator>
+  <validator-id>myValidator</validator-id>
+  <validator-class>validator.MyValidator</validator-class>
+ </validator>
  <application>
   <locale-config>
    <default-locale>de</default-locale>
