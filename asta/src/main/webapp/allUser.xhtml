@@ -17,6 +17,10 @@
 						<h:dataTable var="user" value="#{userController.users}" rowClasses="odd,even" headerClass="header">
 								<f:facet name="header">Nutzer</f:facet>
 								<h:column>
+										<f:facet name="header">ID</f:facet>
+										<h:outputText value="#{user.userID}" />
+								</h:column>
+								<h:column>
 										<f:facet name="header">Vorname</f:facet>
 										<h:outputText value="#{user.firstName}" />
 								</h:column>

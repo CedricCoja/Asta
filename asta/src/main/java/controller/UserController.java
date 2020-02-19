@@ -30,17 +30,31 @@ public class UserController {
   private User saveEntity = new User();
 
   @PostConstruct
-  public void init() throws Throwable, SystemException {
-    utx.begin();
+  public void init() {
+    try {
+      utx.begin();
+    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    users = new ListDataModel<User>();
 
     em.persist(new User("Janek", "Bredehöft", "bredehoeft.janek@gmail.com", "hallo123"));
     em.persist(new User("Cedric", "Coja", "ceddyderteddy@poposex.com", "schalke04"));
     em.persist(new User("Louna", "Fehder", "lfehder@hs-bremerhaven.de", "passwort"));
 
-    users = new ListDataModel<User>();
-
     users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-    utx.commit();
+    try {
+      try {
+        utx.commit();
+      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   public String newUser() {
@@ -57,7 +71,7 @@ public class UserController {
     return "logintry";
   }
 
-  public String delete() throws Throwable, SystemException {
+  public String deleteProfil() throws Throwable, SystemException {
     saveEntity = users.getRowData();
     utx.begin();
     saveEntity = em.merge(saveEntity);

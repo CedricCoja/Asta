@@ -9,7 +9,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.SystemException;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
 
 import ticket.Ticket;
@@ -28,11 +29,28 @@ public class TicketController {
   private Ticket saveEntity = new Ticket();
 
   @PostConstruct
-  public void init() throws Throwable, SystemException {
-    utx.begin();
+  public void init() {
+    try {
+      utx.begin();
+    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
     tickets = new ListDataModel<Ticket>();
     tickets.setWrappedData(em.createNamedQuery("SelectTicket").getResultList());
-    utx.commit();
+
+    try {
+      try {
+        utx.commit();
+      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   public String newTicket() {
@@ -40,12 +58,27 @@ public class TicketController {
     return "newTicket";
   }
 
-  public String saveTicket() throws Throwable, SystemException {
-    utx.begin();
+  public String saveTicket() {
+    try {
+      utx.begin();
+    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     saveEntity = em.merge(saveEntity);
     em.persist(saveEntity);
     tickets.setWrappedData(em.createNamedQuery("SelectTicket").getResultList());
-    utx.commit();
+    try {
+      try {
+        utx.commit();
+      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     return "allEvent";
   }
 

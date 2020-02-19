@@ -46,8 +46,6 @@ public class User implements Serializable {
   @Column(name = "Passwort")
   private String password;
 
-  private String statuspruefung = "hs-bremerhaven.de";
-
   public User() {
   }
 
@@ -56,20 +54,12 @@ public class User implements Serializable {
     this.lastName = lastName;
     this.email = email;
     this.password = password;
-    if (email.contains(statuspruefung)) {
+    if (email.contains("hs-bremerhaven.de")) {
       this.status = Status.STUDENT;
     } else {
       this.status = Status.EXTERN;
     }
     this.role = Role.ADMIN;
-  }
-
-  public Integer getId() {
-    return userID;
-  }
-
-  public void setId(Integer id) {
-    this.userID = id;
   }
 
   public Role getRole() {
@@ -102,7 +92,7 @@ public class User implements Serializable {
 
   public void setEmail(String email) {
     this.email = email;
-    if (email.contains(statuspruefung)) {
+    if (email.contains("hs-bremerhaven.de")) {
       this.status = Status.STUDENT;
     } else {
       this.status = Status.EXTERN;

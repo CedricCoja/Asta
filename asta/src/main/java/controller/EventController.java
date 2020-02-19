@@ -11,6 +11,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -30,8 +32,13 @@ public class EventController {
   private Event saveEntity = new Event();
 
   @PostConstruct
-  public void init() throws Throwable, SystemException {
-    utx.begin();
+  public void init() {
+    try {
+      utx.begin();
+    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
     em.persist(new Event("Tour", "ganz coole Tour eigentlich", "Bremerhaven", new GregorianCalendar(1993, 01, 06).getTime(), "19:30"));
     em.persist(new Event("Orkie", "mit ganz viel Orkan", "Kistnerstraße", new GregorianCalendar(2010, 01, 06).getTime(), "10:45"));
@@ -39,7 +46,18 @@ public class EventController {
     events = new ListDataModel<Event>();
 
     events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
-    utx.commit();
+
+    try {
+      try {
+        utx.commit();
+      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   public String newEvent() {
