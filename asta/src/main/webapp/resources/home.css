@@ -68,10 +68,10 @@ body {
 
 .first, .second {
 	width: 100%;
-	height: 50px;
+	height: 30px;
 	font-family: 'Open Sans', sans-serif;
 	transition: all 0.2s ease-in-out;
-	font-size: 17px;
+	font-size: 15px;
 	text-transform: uppercase;
 	color: #FFF;
 	letter-spacing: 2px;
@@ -179,18 +179,19 @@ body {
 }
 /* MenuBar */
 nav {
-  position: absolute;
   width: 100%;
   top: 0;
   left: 0;
   background: #000000;
   font-size: 16px;
   box-shadow: 0 0 10px rgba(0,0,0,1);
+  text-align: left;
 }
 nav a {
   display: block;
   color: #fff;
   text-decoration: none;
+  Position:left;
 }
  
 nav li {
@@ -201,11 +202,9 @@ nav li {
 }
 
 nav > ul {
-  position: relative;
-  width: 800px;
+  width: 1500px;
   margin: 0 auto;
   padding: 0;
-  text-align: center;
 }
 
 nav > ul > li > a {
@@ -273,4 +272,8 @@ nav .megamenu h4 {
   margin-bottom: 15px;
   color: #000;
   text-transform: uppercase;
+}
+.navCenter{
+ visibility: visible;
+  height: auto;
 }

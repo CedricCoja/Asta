@@ -11,25 +11,23 @@
 	<title>AStA Online-Shop</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-	<nav>
+	<nav class="navCenter">
 	<ul>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Feten - Tickets</a></li>
-		<li><a href="#">Events - Anmeldung</a></li>
+		<li><a href="http://localhost:8080/asta/home.xhtml">Home</a></li>
+		<li><a href="http://localhost:8080/asta/allFeten.xhtml">Feten - Tickets</a></li>
+		<li><a href="http://localhost:8080/asta/allEvent.xhtml">Events - Anmeldung</a></li>
 		<li class="submenu"><a href="#" title="Unser Produktsortiment">Mein
 				Bereich</a>
 			<ul class="megamenu">
 				<ul>
-					<li><a href="#">Profil</a></li>
-					<li><a href="#">Meine Bestellung</a></li>
+					<li><a href="http://localhost:8080/asta/profil.xhtml">Profil</a></li>
+					<li><a href="http://localhost:8080/asta/meineBestellungen.xhtml">Meine Bestellung</a></li>
 				</ul>
 			</ul></li>
-		<li><a href="#">Über uns</a></li>
-		<f:facet name="options">
-			<p:inputText style="margin-right:10px" />
-			<p:commandButton type="button" value="Logout" />
-		</f:facet>
+		<li><a href="http://localhost:8080/asta/ueberuns.xhtml">Über uns</a></li>
 	</ul>
+	<ul class="navCenter">
+			<li><a href="http://localhost:8080/asta/index.xhtml">Ausloggen</a></li></ul>
 	</nav>
 </h:head>
 <h:body>
