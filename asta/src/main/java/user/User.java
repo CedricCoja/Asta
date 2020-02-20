@@ -49,7 +49,7 @@ public class User implements Serializable {
   public User() {
   }
 
-  public User(String firstName, String lastName, String email, String password) {
+  public User(String firstName, String lastName, String email, String password, Role role) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -59,7 +59,7 @@ public class User implements Serializable {
     } else {
       this.status = Status.EXTERN;
     }
-    this.role = Role.ADMIN;
+    this.role = role;
   }
 
   public Role getRole() {
@@ -92,11 +92,11 @@ public class User implements Serializable {
 
   public void setEmail(String email) {
     this.email = email;
-    if (email.contains("hs-bremerhaven.de")) {
-      this.status = Status.STUDENT;
-    } else {
-      this.status = Status.EXTERN;
-    }
+    //    if (email.contains("hs-bremerhaven.de")) {
+    //      this.status = Status.STUDENT;
+    //    } else {
+    //      this.status = Status.EXTERN;
+    //    }
   }
 
   public Status getStatus() {
