@@ -11,26 +11,14 @@
 	<title>AStA Online-Shop</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-	<nav class="navCenter">
-	<ul>
-		<li><a href="http://localhost:8080/asta/home.xhtml">Home</a></li>
-		<li><a href="http://localhost:8080/asta/allFeten.xhtml">Feten - Tickets</a></li>
-		<li><a href="http://localhost:8080/asta/allEvent.xhtml">Events - Anmeldung</a></li>
-		<li class="submenu"><a href="#" title="Unser Produktsortiment">Mein
-				Bereich</a>
-			<ul class="megamenu">
-				<ul>
-					<li><a href="http://localhost:8080/asta/profil.xhtml">Profil</a></li>
-					<li><a href="http://localhost:8080/asta/meineBestellungen.xhtml">Meine Bestellung</a></li>
-				</ul>
-			</ul></li>
-		<li><a href="http://localhost:8080/asta/ueberuns.xhtml">Über uns</a></li>
-	</ul>
-	<ul class="navCenter">
-			<li><a href="http://localhost:8080/asta/index.xhtml">Ausloggen</a></li></ul>
-	</nav>
+
 </h:head>
 <h:body>
+<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
 	<h1 class="centerHome">AStA Online-Shop</h1>
 	<h3>
 		<div class="textHome">

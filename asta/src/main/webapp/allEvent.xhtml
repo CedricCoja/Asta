@@ -10,27 +10,38 @@
 	<title>Alle Events</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-	<nav class="navCenter">
-	<ul>
-		<li><a href="http://localhost:8080/asta/home.xhtml">Home</a></li>
-		<li><a href="http://localhost:8080/asta/allFeten.xhtml">Feten - Tickets</a></li>
-		<li><a href="http://localhost:8080/asta/allEvent.xhtml">Events - Anmeldung</a></li>
-		<li class="submenu"><a href="#" title="Unser Produktsortiment">Mein
-				Bereich</a>
-			<ul class="megamenu">
-				<ul>
-					<li><a href="http://localhost:8080/asta/profil.xhtml">Profil</a></li>
-					<li><a href="http://localhost:8080/asta/meineBestellungen.xhtml">Meine Bestellung</a></li>
-				</ul>
-			</ul></li>
-		<li><a href="http://localhost:8080/asta/ueberuns.xhtml">Über uns</a></li>
-		<f:facet name="options">
-			<p:inputText style="margin-right:10px" />
-			<p:commandButton type="button" value="Logout" />
-		</f:facet>
-	</ul>
-	</nav>
 </h:head>
 <body>
+	<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
+	<h1 class="center">Event - Anmeldung</h1>
+	<div class="text">
+		<h3>Hier könnt ihr euch für Events, wie z.B das Kutterpullen
+			anmelden.</h3>
+	</div>
+
+	<div id="box_1">
+		<H2>
+			<h:outputText value="#{eventController.saveEntity.beschreibung}" />
+		</H2>
+		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg"
+			alt="Platzhalter" />
+		<p>
+			Datum:
+			<h:outputText value="#{eventController.saveEntity.date}" />
+			<br /> <br /> Uhrzeit:
+			<h:outputText value="#{eventController.saveEntity.time}" />
+			<br /> <br /> Ort:
+			<h:outputText value="#{eventController.saveEntity.place}" />
+		</p>
+		<p>
+			<a href="#" class="myButton">Anmeldung</a>
+		</p>
+	</div>
+	<!--//end #box_1//-->
+
 </body>
 </html>
