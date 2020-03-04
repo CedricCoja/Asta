@@ -9,7 +9,11 @@
 </h:head>
 
 <h:body>
-
+<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
 		<div id="content" style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
 				<h1>
 						<a style="color: maroon;">#{msg.newEvent}</a>
@@ -19,14 +23,14 @@
 
 								<p:panel id="panel" header="#{msg.newEvent}">
 										<h:panelGrid columns="2">
-												<h:outputLabel value="#{msg.bezeichnung}:" for="bezeichnung" />
+												<h:outputLabel value="#{msg.designation}:" for="bezeichnung" />
 												<h:panelGroup>
 														<p:inputText id="bezeichnung" value="#{eventController.saveEntity.bezeichnung}">
 														</p:inputText>
 														<p:message for="bezeichnung" />
 												</h:panelGroup>
 
-												<h:outputLabel value="#{msg.beschreibung}:" for="beschreibung" />
+												<h:outputLabel value="#{msg.description}:" for="beschreibung" />
 												<h:panelGroup>
 														<p:inputText id="beschreibung" value="#{eventController.saveEntity.beschreibung}">
 														</p:inputText>

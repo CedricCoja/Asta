@@ -10,46 +10,27 @@
 	<title>AStA Online-Shop</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-	<nav>
-	<ul>
-		<li><a href="http://localhost:8080/asta/home.xhtml">Home</a></li>
-		<li><a href="http://localhost:8080/asta/allFeten.xhtml">Feten - Tickets</a></li>
-		<li><a href="http://localhost:8080/asta/allEvent.xhtml">Events - Anmeldung</a></li>
-		<li class="submenu"><a href="#" title="Unser Produktsortiment">Mein
-				Bereich</a>
-			<ul class="megamenu">
-				<ul>
-					<li><a href="http://localhost:8080/asta/profil.xhtml">Profil</a></li>
-					<li><a href="http://localhost:8080/asta/meineBestellungen.xhtml">Meine Bestellung</a></li>
-				</ul>
-			</ul></li>
-		<li><a href="http://localhost:8080/asta/ueberuns.xhtml">Über uns</a></li>
-		<f:facet name="options">
-			<p:inputText style="margin-right:10px" />
-			<p:commandButton type="button" value="Logout" />
-		</f:facet>
-	</ul>
-	</nav>
-</h:head>
 
-
-<h:head>
-		<title>AStA-#{msg.profil}</title>
+		<title>AStA-#{msg.myProfile}</title>
 		<link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" href="resources/shop.css" type="text/css" />
 </h:head>
 
 <h:body>
-
+<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
 		<div id="content" style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
 				<h1>
-						<a style="color: maroon;">#{msg.profil}</a>
+						<a style="color: maroon;">#{msg.myProfile}</a>
 				</h1>
 
 				<h:form id="form">
 
 						<p:growl showDetail="true" />
-						<p:panel id="panel" header="#{msg.userDaten}">
+						<p:panel id="panel" header="#{msg.userData}">
 								<h:panelGrid columns="2">
 										<h:outputLabel value="#{msg.firstName}" for="firstName" />
 										<h:outputText value="#{loginController.user.firstName}" />
