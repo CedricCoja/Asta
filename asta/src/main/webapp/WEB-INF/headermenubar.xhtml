@@ -13,19 +13,15 @@
 		type="text/css" />
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<link rel="stylesheet" href="#{request.contextPath}/resources/w3.css"
-		type="text/css" />
 
 </h:head>
 <body>
-	<div class="w3-top">
-		<div class="w3-bar w3-white w3-wide w3-padding w3-card">
 			<h:form>
 				<p:growl id="messages" />
 
 				<!-- 			style="float:right;" -->
-				<p:menubar class="w3-bar-item w3-button">
-					<p:menuitem class="w3-bar-item w3-button" value="#{msg.start}"
+				<p:menubar>
+					<p:menuitem value="#{msg.start}"
 						url="home.xhtml" icon="ui-icon-home" />
 					<p:submenu label="#{msg.myEvents}">
 						<p:menuitem class="w3-bar-item w3-button" value="#{msg.myParty}"
@@ -34,21 +30,17 @@
 							url="allEvent.xhtml" />
 					</p:submenu>
 
-					<p:submenu class="w3-bar-item w3-button" label="#{msg.myArea}"
+					<p:submenu label="#{msg.myArea}"
 						styleClass="align:center">
 						<p:menuitem value="#{msg.myProfile}" action="profil.xhtml" />
 						<p:menuitem value="#{msg.myOrders}" action="myOrders.xhtml" />
 					</p:submenu>
-					<p:menuitem class="w3-bar-item w3-button" value="#{msg.login}"
-						outcome="login.xhtml" />
-					<p:menuitem class="w3-bar-item w3-button" value="#{msg.logout} "
+					<p:menuitem value="#{msg.logout} "
 						action="#{kundenHandler.logout()}" />
-					<p:menuitem class="w3-bar-item w3-button"
+					<p:menuitem
 						value="#{msg.shoppingCart}" outcome="cart.xhtml"
 						icon="ui-icon-cart" />
 				</p:menubar>
 			</h:form>
-		</div>
-	</div>
 </body>
 </html>
