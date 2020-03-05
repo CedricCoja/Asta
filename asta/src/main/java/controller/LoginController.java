@@ -30,7 +30,7 @@ public class LoginController {
   private UserTransaction utx;
 
   @SuppressWarnings({ "unchecked", "unchecked" })
-  public void login() {
+  public String login() {
 
     Query login = em.createQuery("select u from User u " + "where u.email = :email and u.password = :password ");
     login.setParameter("email", email);
@@ -48,6 +48,7 @@ public class LoginController {
       FacesContext context = FacesContext.getCurrentInstance();
       context.addMessage(null, new FacesMessage("FAILURE", "E-Mail oder Passwort falsch! - Bitte versuchen Sie es erneut!"));
     }
+    return "profile";
   }
 
   public boolean loggedIn() {
