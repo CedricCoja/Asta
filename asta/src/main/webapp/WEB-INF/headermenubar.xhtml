@@ -26,7 +26,7 @@
 			<!-- 			style="float:right;" -->
 			<p:menubar>
 				<p:menuitem value="#{msg.start}" url="home.xhtml" icon="pi pi-home" />
-				<p:menuitem value="#{msg.myEvents}" url="allEvent.xhtml"
+				<p:menuitem value="#{msg.myEvents}" url="allFeten.xhtml"
 					icon="pi pi-list" />
 				<p:menuitem value="#{msg.myProfile}" action="profil.xhtml"
 					icon="pi pi-user" />
@@ -35,13 +35,13 @@
 
 
 				<f:facet name="options">
-					<p:commandButton rendered="#{not empty user}"value="#{msg.logout}"
+					<p:commandButton rendered="#{not empty user}" value="#{msg.logout}"
 						action="#{loginController.logout()}" icon="pi pi-sign-out" />
-					<p:button value="#{msg.shoppingCart}" outcome="cart.xhtml"
+					<p:button rendered="#{not empty user}" value="#{msg.shoppingCart}" outcome="cart.xhtml"
 						icon="pi pi-shopping-cart" />
-					<p:commandButton value="#{msg.login} " action="logintry.xhtml"
+					<p:commandButton value="#{msg.login} " rendered="#{empty user}" action="logintry.xhtml"
 						icon="pi pi-sign-in" />
-					<p:button value="#{msg.register}" outcome="register.xhtml"
+					<p:button value="#{msg.register}" rendered="#{empty user}" outcome="register.xhtml"
 						icon="pi pi-user-plus" />
 				</f:facet>
 			</p:menubar>
