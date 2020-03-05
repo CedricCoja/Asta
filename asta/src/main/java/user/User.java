@@ -59,7 +59,7 @@ public class User implements Serializable {
     } else {
       this.status = Status.EXTERN;
     }
-    this.role = role;
+    setRole(role);
   }
 
   public Role getRole() {
