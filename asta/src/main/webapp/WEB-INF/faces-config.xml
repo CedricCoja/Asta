@@ -19,13 +19,13 @@
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://xmlns.jcp.org/xml/ns/javaee         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
  <managed-bean>
-  <managed-bean-name>userController</managed-bean-name>
-  <managed-bean-class>controller.UserController</managed-bean-class>
+  <managed-bean-name>loginController</managed-bean-name>
+  <managed-bean-class>controller.LoginController</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>loginController</managed-bean-name>
-  <managed-bean-class>controller.LoginController</managed-bean-class>
+  <managed-bean-name>userController</managed-bean-name>
+  <managed-bean-class>controller.UserController</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <managed-bean>
