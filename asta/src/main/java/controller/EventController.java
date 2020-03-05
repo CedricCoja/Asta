@@ -89,5 +89,4 @@ public class EventController {
   public void setSaveEntity(Event saveEntity) {
     this.saveEntity = saveEntity;
   }
-
 }
