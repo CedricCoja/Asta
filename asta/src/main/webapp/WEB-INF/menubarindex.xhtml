@@ -1,6 +1,4 @@
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+			<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
@@ -24,27 +22,14 @@
 			<p:growl id="messages" />
 
 			<!-- 			style="float:right;" -->
-			<p:menubar>
-				<p:menuitem value="#{msg.start}" url="home.xhtml" icon="pi pi-home" />
-				<p:menuitem value="#{msg.myEvents}" url="allEvent.xhtml"
-					icon="pi pi-list" />
-				<p:menuitem value="#{msg.myProfile}" action="profil.xhtml"
-					icon="pi pi-user" />
-				<p:menuitem value="#{msg.aboutUs} " action="ueberuns.xhtml"
-					icon="pi pi-bookmark" />
-
-
+			<p:menubar>	
 				<f:facet name="options">
-					<p:commandButton rendered="#{not empty user}"value="#{msg.logout}"
-						action="#{loginController.logout()}" icon="pi pi-sign-out" />
-					<p:button value="#{msg.shoppingCart}" outcome="cart.xhtml"
-						icon="pi pi-shopping-cart" />
-					<p:commandButton value="#{msg.login} " action="logintry.xhtml"
-						icon="pi pi-sign-in" />
+					<p:commandButton value="#{msg.login} "
+						action="logintry.xhtml"  icon="pi pi-sign-in" />
 					<p:button value="#{msg.register}" outcome="register.xhtml"
 						icon="pi pi-user-plus" />
 				</f:facet>
-			</p:menubar>
+				</p:menubar>
 		</h:form>
 	</div>
 </body>
