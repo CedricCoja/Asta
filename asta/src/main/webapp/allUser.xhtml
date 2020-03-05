@@ -14,35 +14,35 @@
 		</div>
 		<div id="content">
 				<ui:insert name="content">
-						<h:dataTable var="user" value="#{userController.users}" rowClasses="odd,even" headerClass="header">
+						<h:dataTable var="user" value="#{user}" rowClasses="odd,even" headerClass="header">
 								<f:facet name="header">Nutzer</f:facet>
 								<h:column>
 										<f:facet name="header">ID</f:facet>
-										<h:outputText value="#{user.userID}" />
+										<h:outputText value="#{userID}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">Vorname</f:facet>
-										<h:outputText value="#{user.firstName}" />
+										<h:outputText value="#{firstName}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">Nachname</f:facet>
-										<h:outputText value="#{user.lastName}" />
+										<h:outputText value="#{lastName}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">E-Mail</f:facet>
-										<h:outputText value="#{user.email}" />
+										<h:outputText value="#{email}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">Passwort</f:facet>
-										<h:outputText value="#{user.password}" />
+										<h:outputText value="#{password}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">Status</f:facet>
-										<h:outputText value="#{user.status}" />
+										<h:outputText value="#{status}" />
 								</h:column>
 								<h:column>
 										<f:facet name="header">Rolle</f:facet>
-										<h:outputText value="#{user.role}" />
+										<h:outputText value="#{role}" />
 								</h:column>
 						</h:dataTable>
 				</ui:insert>

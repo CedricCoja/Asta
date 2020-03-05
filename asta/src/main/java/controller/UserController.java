@@ -9,12 +9,10 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.RollbackException;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import javax.validation.constraints.Size;
 
 import user.Role;
 import user.User;
@@ -147,74 +145,60 @@ public class UserController {
   private DataModel<User> users;
   private User saveEntity = new User();
 
+  @Size(min = 3, max = 30)
   private String firstName;
+  @Size(min = 3, max = 30)
   private String lastName;
+  @Size(min = 6, max = 30)
   private String email;
+  @Size(min = 3, max = 12)
   private String password;
 
-  @PostConstruct
-  public void init() {
-    try {
-      utx.begin();
-    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-      e.printStackTrace();
-    }
-    users = new ListDataModel<User>();
+  private int userID;
 
-    em.persist(new User("Janek", "Bredehöft", "bredehoeft.janek@gmail.com", "hallo123", Role.ADMIN));
-    em.persist(new User("Cedric", "Coja", "ceddyderteddy@poposex.com", "schalke04", Role.ADMIN));
-    em.persist(new User("Louna", "Fehder", "lfehder@hs-bremerhaven.de", "passwort", Role.ADMIN));
+  private User user = new User();
 
-    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-    try {
-      try {
-        utx.commit();
-      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-        e.printStackTrace();
-      }
-    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-      e.printStackTrace();
-    }
-  }
+  //  public String register() {
+  //    try {
+  //      String valmail = "email";
+  //      Query valuser = em.createQuery("select u from User u " + "where u.email = :" + valmail);
+  //      String mail = null;
+  //      valuser.setParameter(valmail, mail);
+  //      if (valuser.getResultList().size() == 0) {
+  //        utx.begin();
+  //        em.persist(new User(firstName, lastName, email, password, Role.USER));
+  //        users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+  //        utx.commit();
+  //      }
+  //    } catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+  //      e.printStackTrace();
+  //    }
+  //    return "logintry";
+  //  }
 
-  public String register() {
-    try {
-      String valmail = "email";
-      Query valuser = em.createQuery("select u from User u " + "where u.email = :" + valmail);
-      String mail = null;
-      valuser.setParameter(valmail, mail);
-      if (valuser.getResultList().size() == 0) {
-        utx.begin();
-        em.persist(new User(firstName, lastName, email, password, Role.USER));
-        users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-        utx.commit();
-      }
-    } catch (SecurityException | IllegalStateException | RollbackException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
-      e.printStackTrace();
-    }
-    return "logintry";
-  }
-
-  public String deleteProfil() throws Throwable, SystemException {
-    saveEntity = users.getRowData();
-    utx.begin();
-    saveEntity = em.merge(saveEntity);
-    em.remove(saveEntity);
-    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-    return "index";
-  }
+  //  public String deleteProfil() throws Throwable, SystemException {
+  //    User user;
+  //    em.remove(user);
+  //    users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
+  //    return "index";
+  //  }
 
   public String saveProfil() {
+
+    //    System.out.println(userID);
+    //    System.out.println(firstName);
     try {
+      // userID = LoginController.getUserID();
+      user = em.find(User.class, userID);
       utx.begin();
-      saveEntity = em.merge(saveEntity);
-      em.persist(saveEntity);
+      user = em.merge(user);
+      em.persist(user);
       users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
       utx.commit();
     } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
       e.printStackTrace();
     }
-    return "profil";
+    return "profile";
   }
 
   public DataModel<User> getUsers() {
@@ -223,6 +207,14 @@ public class UserController {
 
   public void setUsers(DataModel<User> users) {
     this.users = users;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public User getSaveEntity() {
