@@ -16,31 +16,27 @@
 
 </h:head>
 <body>
-			<h:form>
-				<p:growl id="messages" />
+	<h:form>
+		<p:growl id="messages" />
 
-				<!-- 			style="float:right;" -->
-				<p:menubar>
-					<p:menuitem value="#{msg.start}"
-						url="home.xhtml" icon="ui-icon-home" />
-					<p:submenu label="#{msg.myEvents}">
-						<p:menuitem class="w3-bar-item w3-button" value="#{msg.myParty}"
-							url="allFeten.xhtml" />
-						<p:menuitem class="w3-bar-item w3-button" value="#{msg.myEvents}"
-							url="allEvent.xhtml" />
-					</p:submenu>
+		<!-- 			style="float:right;" -->
+		<p:menubar>
+			<p:menuitem value="#{msg.start}" url="home.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="#{msg.myEvents}" url="allEvent.xhtml" />
+			<p:submenu label="#{msg.myArea}" styleClass="align:center">
+				<p:menuitem value="#{msg.myProfile}" action="profil.xhtml" />
+				<p:menuitem value="#{msg.myOrders}" action="myOrders.xhtml" />
+			</p:submenu>
+			<p:menuitem value="#{msg.aboutUs} " action="ueberuns.xhtml"/>
 
-					<p:submenu label="#{msg.myArea}"
-						styleClass="align:center">
-						<p:menuitem value="#{msg.myProfile}" action="profil.xhtml" />
-						<p:menuitem value="#{msg.myOrders}" action="myOrders.xhtml" />
-					</p:submenu>
-					<p:menuitem value="#{msg.logout} "
+				
+				<f:facet name="options">
+					<p:commandButton value="#{msg.logout} "
 						action="#{kundenHandler.logout()}" />
-					<p:menuitem
-						value="#{msg.shoppingCart}" outcome="cart.xhtml"
-						icon="ui-icon-cart" />
-				</p:menubar>
-			</h:form>
+					<p:button
+						value="#{msg.shoppingCart}" outcome="cart.xhtml" icon="ui-icon-cart" />
+				</f:facet>
+		</p:menubar>
+	</h:form>
 </body>
 </html>
