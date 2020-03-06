@@ -3,11 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 		<link rel="stylesheet" href="resources/allUserTable.css" type="text/css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
+		type="text/css" />
+			<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
+</h:head>
+<h:body>
+
+	
 		<title><ui:insert name="title">
       Nutzerverwaltung
     </ui:insert></title>
-</h:head>
-<h:body>
+
 		<div id="header">
 				<ui:insert name="header">
 				</ui:insert>
