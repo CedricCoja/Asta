@@ -37,12 +37,12 @@
 				<f:facet name="options">
 					<p:commandButton rendered="#{not empty user}" value="#{msg.logout}"
 						action="#{loginController.logout()}" icon="pi pi-sign-out" />
-					<p:button rendered="#{not empty user}" value="#{msg.shoppingCart}" outcome="cart.xhtml"
-						icon="pi pi-shopping-cart" />
-					<p:commandButton value="#{msg.login} " rendered="#{empty user}" action="logintry.xhtml"
-						icon="pi pi-sign-in" />
-					<p:button value="#{msg.register}" rendered="#{empty user}" outcome="register.xhtml"
-						icon="pi pi-user-plus" />
+					<p:button rendered="#{not empty user}" value="#{msg.shoppingCart}"
+						outcome="cart.xhtml" icon="pi pi-shopping-cart" />
+					<p:commandButton rendered="#{empty user}" value="#{msg.login} "
+						action="logintry.xhtml" icon="pi pi-sign-in" />
+					<p:button rendered="#{empty user}" value="#{msg.register}"
+						outcome="register.xhtml" icon="pi pi-user-plus" />
 				</f:facet>
 			</p:menubar>
 		</h:form>

@@ -22,7 +22,7 @@
 	<div class="text">
 		<h3>Hier könnt ihr eure Tickets für die Hochschulfeten erwerben.</h3>
 	</div>
-
+	<!-- 
 	<div id="box_1">
 		<H2>
 			<h:outputText value="#{eventController.saveEntity.beschreibung}" />
@@ -40,8 +40,39 @@
 		<p>
 			<a href="#" class="myButton">Tickets</a>
 		</p>
-	</div>
+	</div> -->
 	<!--//end #box_1//-->
-
+	<p:dataTable var="user" value="#{user}" rowClasses="odd,even"
+		headerClass="header">
+		<f:facet name="header">Nutzer</f:facet>
+		<p:column>
+			<f:facet name="header">ID</f:facet>
+			<h:outputText value="#{userID}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Vorname</f:facet>
+			<h:outputText value="#{firstName}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Nachname</f:facet>
+			<h:outputText value="#{lastName}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">E-Mail</f:facet>
+			<h:outputText value="#{email}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Passwort</f:facet>
+			<h:outputText value="#{password}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Status</f:facet>
+			<h:outputText value="#{status}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Rolle</f:facet>
+			<h:outputText value="#{role}" />
+		</p:column>
+	</p:dataTable>
 </body>
 </html>
