@@ -1,6 +1,8 @@
 
 package controller;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.bean.ManagedBean;
@@ -9,6 +11,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
@@ -21,15 +24,15 @@ import user.User;
 @SessionScoped
 public class UserController {
 
-	@PersistenceContext
-	private EntityManager em;
+  @PersistenceContext
+  private EntityManager em;
 
 	@Resource
 	private UserTransaction utx;
 
 	private DataModel<User> users;
 	private User saveEntity = new User();
-
+	
 	@Size(min = 3, max = 30)
 	private String firstName;
 	@Size(min = 3, max = 30)
@@ -42,28 +45,6 @@ public class UserController {
 	private int userID;
 
 	private User user = new User();
-
-	// public String register() {
-	// try {
-	// String valmail = "email";
-	// Query valuser = em.createQuery("select u from User u " + "where u.email = :"
-	// + valmail);
-	// String mail = null;
-	// valuser.setParameter(valmail, mail);
-	// if (valuser.getResultList().size() == 0) {
-	// utx.begin();
-	// em.persist(new User(firstName, lastName, email, password, Role.USER));
-	// users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-	// utx.commit();
-	// }
-	// } catch (SecurityException | IllegalStateException | RollbackException |
-	// HeuristicRollbackException | HeuristicMixedException |
-	// javax.transaction.NotSupportedException | javax.transaction.SystemException |
-	// javax.transaction.RollbackException e) {
-	// e.printStackTrace();
-	// }
-	// return "logintry";
-	// }
 
 	// public String deleteProfil() throws Throwable, SystemException {
 	// User user;
@@ -90,6 +71,16 @@ public class UserController {
 			e.printStackTrace();
 		}
 		return "profile";
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public List<User> generateUsers (){
+		Query allUser = em.createQuery("select u from User u ");
+		allUser.setParameter("email", email);
+
+		List<User> users = allUser.getResultList();
+		
+		return users;
 	}
 
 	public DataModel<User> getUsers() {
@@ -139,5 +130,4 @@ public class UserController {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 }

@@ -29,7 +29,7 @@ public class LoginController {
 	@Resource
 	private UserTransaction utx;
 
-	@SuppressWarnings({ "unchecked", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public String login() {
 
 		Query login = em.createQuery("select u from User u " + "where u.email = :email and u.password = :password ");
