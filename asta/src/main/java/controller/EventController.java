@@ -22,72 +22,73 @@ import event.Event;
 @SessionScoped
 public class EventController {
 
-  @PersistenceContext
-  private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-  @Resource
-  private UserTransaction utx;
+	@Resource
+	private UserTransaction utx;
 
-  private DataModel<Event> events;
-  private Event saveEntity = new Event();
+	private DataModel<Event> events;
+	private Event saveEntity = new Event();
 
-  @PostConstruct
-  public void init() {
-    try {
-      utx.begin();
-    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+	@PostConstruct
+	public void init() {
+		try {
+			utx.begin();
+		} catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    em.persist(new Event("Tour", "ganz coole Tour eigentlich", "Bremerhaven", new GregorianCalendar(1993, 01, 06).getTime(), "19:30"));
-    em.persist(new Event("Orkie", "mit ganz viel Orkan", "Kistnerstraße", new GregorianCalendar(2010, 01, 06).getTime(), "10:45"));
+		em.persist(new Event("Tour", "ganz coole Tour eigentlich", "Bremerhaven",
+				new GregorianCalendar(1993, 01, 06).getTime(), "19:30"));
+		em.persist(new Event("Orkie", "mit ganz viel Orkan", "Kistnerstraße",
+				new GregorianCalendar(2010, 01, 06).getTime(), "10:45"));
 
-    events = new ListDataModel<Event>();
+		events = new ListDataModel<Event>();
 
-    events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
+		events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
 
-    try {
-      try {
-        utx.commit();
-      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+		try {
+			try {
+				utx.commit();
+			} catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
-  public String newEvent() {
-    saveEntity = new Event();
-    return "newEvent";
-  }
+	public String newEvent() {
+		saveEntity = new Event();
+		return "newEvent";
+	}
 
-  public String saveEvent() throws Throwable, SystemException {
-    utx.begin();
-    saveEntity = em.merge(saveEntity);
-    em.persist(saveEntity);
-    events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
-    utx.commit();
-    return "allEvent";
-  }
+	public String saveEvent() throws Throwable, SystemException {
+		utx.begin();
+		saveEntity = em.merge(saveEntity);
+		em.persist(saveEntity);
+		events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
+		utx.commit();
+		return "allEvent";
+	}
 
-  public DataModel<Event> getEvents() {
-    return events;
-  }
+	public DataModel<Event> getEvents() {
+		return events;
+	}
 
-  public void setEvents(DataModel<Event> events) {
-    this.events = events;
-  }
+	public void setEvents(DataModel<Event> events) {
+		this.events = events;
+	}
 
-  public Event getSaveEntity() {
-    return saveEntity;
-  }
+	public Event getSaveEntity() {
+		return saveEntity;
+	}
 
-  public void setSaveEntity(Event saveEntity) {
-    this.saveEntity = saveEntity;
-  }
-
+	public void setSaveEntity(Event saveEntity) {
+		this.saveEntity = saveEntity;
+	}
 }

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Feten - Tickets</title>
+	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
+		type="text/css" />
+</h:head>
+<body>
+	<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
+
+	<h1 class="center">Feten - Tickets</h1>
+	<div class="text">
+		<h3>Hier könnt ihr eure Tickets für die Hochschulfeten erwerben.</h3>
+	</div>
+
+	<h:form id="form">
+		<p:dataView var="event" value="#{eventController.events}"
+			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+			<p:dataViewGridItem>
+				<p:panel header="#{event.eventID}" style="text-align:center">
+					<h:panelGrid columns="1" style="width:100%">
+						<img src="resources/image/#{event.bezeichnung}.png" />
+
+						<h:outputText value="#{event.eventID}" />
+						<h:outputText value="#{event.bezeichnung}" />
+						<h:outputText value="#{event.beschreibung}" />
+						<h:outputText value="#{event.place}" />
+						<h:outputText value="#{event.date}" />
+						<h:outputText value="#{event.time}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:dataViewGridItem>
+
+			<p:dataViewListItem>
+				<h:panelGrid columns="3" style="width:100%"
+					columnClasses="logo,detail">
+					<img src="resources/image/#{event.bezeichnung}.png" />
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Id:" />
+							<h:outputText value="#{event.eventID}" style="font-weight: bold" />
+
+							<h:outputText value="Bezeichnung:" />
+							<h:outputText value="#{event.bezeichnung}"
+								style="font-weight: bold" />
+
+							<h:outputText value="Beschreibung:" />
+							<h:outputText value="#{event.beschreibung}"
+								style="font-weight: bold" />
+
+							<h:outputText value="Ort:" />
+							<h:outputText value="#{event.place}" style="font-weight: bold" />
+
+							<h:outputText value="Datum:" />
+							<h:outputText value="#{event.date}" style="font-weight: bold" />
+
+							<h:outputText value="Uhrzeit:" />
+							<h:outputText value="#{event.time}" style="font-weight: bold" />
+						</h:panelGrid>
+						
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:dataViewListItem>
+		</p:dataView>
+	</h:form>
+</body>
+</html>
