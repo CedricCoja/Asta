@@ -11,16 +11,36 @@
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
 
-		<title>AStA-#{msg.shoppingCart}</title>
-		<link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="resources/shop.css" type="text/css" />
+	<title>AStA-#{msg.shoppingCart}</title>
+	<link href="https://fonts.googleapis.com/css?family=Jura"
+		rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="resources/shop.css" type="text/css" />
 </h:head>
 
 <h:body>
-<div>
+	<div>
 		<ui:insert>
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
 		</ui:insert>
 	</div>
+
+	<p:dataTable var="cart" value="#{cartController.Carts}">
+
+		<p:column headerText="Event_ID">
+			<h:outputText value="#{cart.eventID}" />
+		</p:column>
+
+		<p:column headerText="Einzelpreis">
+			<h:outputText value="#{cart.unitPrice}" />
+		</p:column>
+
+		<p:column headerText="Menge">
+			<h:outputText value="#{cart.amount}" />
+		</p:column>
+		
+		<p:column headerText="Gesamtpreis">
+			<h:outputText value="#{cart.totalPrice}" />
+		</p:column>
+	</p:dataTable>
 </h:body>
 </html>

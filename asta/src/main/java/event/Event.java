@@ -20,7 +20,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 
-import ticket.Ticket;
 
 @NamedQuery(name = "SelectEvent", query = "Select e from Event e")
 @Entity
@@ -52,10 +51,6 @@ public class Event implements Serializable {
 
   @Column(name = "time")
   private String time;
-
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinColumn(name = "ticketid", nullable = false)
-  private List<Ticket> ticket;
 
   public Event(String bezeichnung, String beschreibung, String place, Date date, String time) {
     this.bezeichnung = bezeichnung;
