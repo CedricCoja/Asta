@@ -22,57 +22,74 @@
 	<div class="text">
 		<h3>Hier könnt ihr eure Tickets für die Hochschulfeten erwerben.</h3>
 	</div>
-	<!-- 
-	<div id="box_1">
-		<H2>
-			<h:outputText value="#{eventController.saveEntity.beschreibung}" />
-		</H2>
-		<img src="resources/image/bildplatzhalter-550x535-300x292.jpg"
-			alt="Platzhalter" />
-		<p>
-			Datum:
-			<h:outputText value="#{eventController.saveEntity.date}" />
-			<br /> <br /> Uhrzeit:
-			<h:outputText value="#{eventController.saveEntity.time}" />
-			<br /> <br /> Ort:
-			<h:outputText value="#{eventController.saveEntity.place}" />
-		</p>
-		<p>
-			<a href="#" class="myButton">Tickets</a>
-		</p>
-	</div> -->
-	<!--//end #box_1//-->
-	<p:dataTable var="user" value="#{user}" rowClasses="odd,even"
-		headerClass="header">
-		<f:facet name="header">Nutzer</f:facet>
-		<p:column>
-			<f:facet name="header">ID</f:facet>
-			<h:outputText value="#{userID}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Vorname</f:facet>
-			<h:outputText value="#{firstName}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Nachname</f:facet>
-			<h:outputText value="#{lastName}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">E-Mail</f:facet>
-			<h:outputText value="#{email}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Passwort</f:facet>
-			<h:outputText value="#{password}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Status</f:facet>
-			<h:outputText value="#{status}" />
-		</p:column>
-		<p:column>
-			<f:facet name="header">Rolle</f:facet>
-			<h:outputText value="#{role}" />
-		</p:column>
-	</p:dataTable>
+	<h:form id="form">
+		<p:dataView var="event" value="#{eventController.events}"
+			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+			<p:dataViewGridItem>
+				<p:panel header="#{event.eventID}" style="text-align:center">
+					<h:panelGrid columns="1" style="width:100%">
+						<img src="resources/image/#{event.bezeichnung}.png" />
+
+						<h:outputText value="#{event.eventID}" />
+						<h:outputText value="#{event.bezeichnung}" />
+						<h:outputText value="#{event.beschreibung}" />
+						<h:outputText value="#{event.place}" />
+						<h:outputText value="#{event.date}" />
+						<h:outputText value="#{event.time}" />
+
+						<h:panelGrid>
+							<h3>Tickets</h3>
+							<h:panelGrid columns="1" style="margin-bottom: 10px">
+								<p:inputText id="txt3" value="#{sliderView.number5}" />
+								<p:slider for="txt3" step="1" maxValue="10" />
+							</h:panelGrid>
+							<p:commandButton value="Tickets kaufen" />
+						</h:panelGrid>
+
+					</h:panelGrid>
+				</p:panel>
+			</p:dataViewGridItem>
+
+			<p:dataViewListItem>
+				<h:panelGrid columns="3" style="width:100%"
+					columnClasses="logo,detail">
+					<img src="resources/image/#{event.bezeichnung}.png" />
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Id:" />
+							<h:outputText value="#{event.eventID}" style="font-weight: bold" />
+
+							<h:outputText value="Bezeichnung:" />
+							<h:outputText value="#{event.bezeichnung}"
+								style="font-weight: bold" />
+
+							<h:outputText value="Beschreibung:" />
+							<h:outputText value="#{event.beschreibung}"
+								style="font-weight: bold" />
+
+							<h:outputText value="Ort:" />
+							<h:outputText value="#{event.place}" style="font-weight: bold" />
+
+							<h:outputText value="Datum:" />
+							<h:outputText value="#{event.date}" style="font-weight: bold" />
+
+							<h:outputText value="Uhrzeit:" />
+							<h:outputText value="#{event.time}" style="font-weight: bold" />
+						</h:panelGrid>
+					</p:outputPanel>
+					<p:outputPanel>
+						<h:panelGrid>
+							<h3>Tickets</h3>
+							<h:panelGrid columns="1" style="margin-bottom: 10px">
+								<p:inputText id="txt3" value="#{sliderView.number5}" />
+								<p:slider for="txt3" step="1" maxValue="10" />
+							</h:panelGrid>
+							<p:commandButton value="Tickets kaufen" />
+						</h:panelGrid>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:dataViewListItem>
+		</p:dataView>
+	</h:form>
 </body>
 </html>

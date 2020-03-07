@@ -67,8 +67,16 @@
 							<h:outputText value="Uhrzeit:" />
 							<h:outputText value="#{event.time}" style="font-weight: bold" />
 						</h:panelGrid>
-						
 					</p:outputPanel>
+					<h:panelGrid>
+						<h3>Tickets</h3>
+						<h:panelGrid columns="1" style="margin-bottom: 10px">
+							<p:inputText id="txt3" value="#{sliderView.number5}" />
+							<p:slider for="txt3" step="1" maxValue="10" />
+						</h:panelGrid>
+						<p:commandButton value="Tickets kaufen" />
+					</h:panelGrid>
+
 				</h:panelGrid>
 			</p:dataViewListItem>
 		</p:dataView>
