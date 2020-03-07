@@ -1,5 +1,5 @@
 
-package ticket;
+package cart;
 
 import java.io.Serializable;
 
@@ -11,77 +11,65 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@NamedQuery(name = "SelectTicket", query = "Select t from Ticket t")
+@NamedQuery(name = "SelectTicket", query = "Select t from Cart t")
 @Entity
 @Table(name = "TICKET")
-public class Ticket implements Serializable {
-  private static final long serialVersionUID = 7719675659305229219L;
+public class Cart implements Serializable {
+	private static final long serialVersionUID = 7719675659305229219L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "Ticket_ID", nullable = false, unique = true)
-  private Integer ticketID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "Cart_ID", nullable = false, unique = true)
+	private Integer cartID;
 
-  @Column(name = "Bezeichnung")
-  private String bezeichnung;
+	@Column(name = "Event_ID", nullable = false)
+	private Integer eventID;
 
-  @Column(name = "Beschreibung")
-  private String beschreibung;
+	@Column(name = "Bruttopreis")
+	private double price;
 
-  @Column(name = "Bruttopreis")
-  private double bruttopreis;
+	@Column(name = "Anzahl")
+	private int amount;
 
-  @Column(name = "Anzahl")
-  private int anzahl;
+	public Cart() {
+	}
 
-  public Ticket() {
-  }
+	public Cart(Integer eventID, double price, int amount) {
 
-  public Ticket(String bezeichnung, String beschreibung, double bruttopreis, int anzahl) {
+		this.eventID = eventID;
+		this.price = price;
+		this.amount = amount;
+	}
 
-    this.bezeichnung = bezeichnung;
-    this.beschreibung = beschreibung;
-    this.bruttopreis = bruttopreis;
-    this.anzahl = anzahl;
-  }
+	public Integer getCartID() {
+		return cartID;
+	}
 
-  public Integer getTicketID() {
-    return ticketID;
-  }
+	public void setCartID(Integer cartID) {
+		this.cartID = cartID;
+	}
 
-  public void setTicketID(Integer ticketID) {
-    this.ticketID = ticketID;
-  }
+	public Integer getEventID() {
+		return eventID;
+	}
 
-  public String getBezeichnung() {
-    return bezeichnung;
-  }
+	public void setEventID(Integer eventID) {
+		this.eventID = eventID;
+	}
 
-  public void setBezeichnung(String bezeichnung) {
-    this.bezeichnung = bezeichnung;
-  }
+	public double getPrice() {
+		return price;
+	}
 
-  public String getBeschreibung() {
-    return beschreibung;
-  }
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
-  public void setBeschreibung(String beschreibung) {
-    this.beschreibung = beschreibung;
-  }
+	public int getAmount() {
+		return amount;
+	}
 
-  public double getBruttopreis() {
-    return bruttopreis;
-  }
-
-  public void setBruttopreis(double bruttopreis) {
-    this.bruttopreis = bruttopreis;
-  }
-
-  public int getAnzahl() {
-    return anzahl;
-  }
-
-  public void setAnzahl(int anzahl) {
-    this.anzahl = anzahl;
-  }
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 }

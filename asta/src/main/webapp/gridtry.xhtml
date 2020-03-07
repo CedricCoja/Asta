@@ -26,6 +26,7 @@
 	<h:form id="form">
 		<p:dataView var="event" value="#{eventController.events}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+			<!--  
 			<p:dataViewGridItem>
 				<p:panel header="#{event.eventID}" style="text-align:center">
 					<h:panelGrid columns="1" style="width:100%">
@@ -37,45 +38,57 @@
 						<h:outputText value="#{event.place}" />
 						<h:outputText value="#{event.date}" />
 						<h:outputText value="#{event.time}" />
+
+						<h:panelGrid colums="1">
+							<h3>Tickets</h3>
+							<h:panelGrid columns="1" style="margin-bottom: 10px">
+								<p:inputText id="txt3" value="#{sliderView.number5}" />
+								<p:slider for="txt3" step="1" maxValue="10" />
+							</h:panelGrid>
+							<p:commandButton value="Tickets kaufen" />
+						</h:panelGrid>
+
 					</h:panelGrid>
 				</p:panel>
 			</p:dataViewGridItem>
+			-->
 
 			<p:dataViewListItem>
-				<h:panelGrid columns="3" style="width:100%"
+				<h:panelGrid columns="3" />
 					columnClasses="logo,detail">
 					<img src="resources/image/#{event.bezeichnung}.png" />
-					<p:outputPanel>
-						<h:panelGrid columns="2" cellpadding="5">
-							<h:outputText value="Id:" />
-							<h:outputText value="#{event.eventID}" style="font-weight: bold" />
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Id:" />
+						<h:outputText value="#{event.eventID}" style="font-weight: bold" />
 
-							<h:outputText value="Bezeichnung:" />
-							<h:outputText value="#{event.bezeichnung}"
-								style="font-weight: bold" />
+						<h:outputText value="Bezeichnung:" />
+						<h:outputText value="#{event.bezeichnung}"
+							style="font-weight: bold" />
 
-							<h:outputText value="Beschreibung:" />
-							<h:outputText value="#{event.beschreibung}"
-								style="font-weight: bold" />
+						<h:outputText value="Beschreibung:" />
+						<h:outputText value="#{event.beschreibung}"
+							style="font-weight: bold" />
 
-							<h:outputText value="Ort:" />
-							<h:outputText value="#{event.place}" style="font-weight: bold" />
+						<h:outputText value="Ort:" />
+						<h:outputText value="#{event.place}" style="font-weight: bold" />
 
-							<h:outputText value="Datum:" />
-							<h:outputText value="#{event.date}" style="font-weight: bold" />
+						<h:outputText value="Datum:" />
+						<h:outputText value="#{event.date}" style="font-weight: bold" />
 
-							<h:outputText value="Uhrzeit:" />
-							<h:outputText value="#{event.time}" style="font-weight: bold" />
-						</h:panelGrid>
-					</p:outputPanel>
-					<h:panelGrid>
-						<h3>Tickets</h3>
-						<h:panelGrid columns="1" style="margin-bottom: 10px">
-							<p:inputText id="txt3" value="#{sliderView.number5}" />
-							<p:slider for="txt3" step="1" maxValue="10" />
-						</h:panelGrid>
-						<p:commandButton value="Tickets kaufen" />
+						<h:outputText value="Uhrzeit:" />
+						<h:outputText value="#{event.time}" style="font-weight: bold" />
 					</h:panelGrid>
+				</p:outputPanel>
+
+				<h:panelGrid colums="1">
+					<h3>Tickets</h3>
+					<h:panelGrid columns="1" style="margin-bottom: 10px">
+						<p:inputText id="txt3" value="#{sliderView.number5}" />
+						<p:slider for="txt3" step="1" maxValue="10" />
+					</h:panelGrid>
+					<p:commandButton value="Tickets kaufen" />
+				</h:panelGrid>
 
 				</h:panelGrid>
 			</p:dataViewListItem>

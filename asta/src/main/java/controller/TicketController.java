@@ -13,11 +13,11 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
 
-import ticket.Ticket;
+import cart.Cart;
 
 @ManagedBean(value = "ticketController")
 @SessionScoped
-public class TicketController {
+public class CartController {
 
   @PersistenceContext
   private EntityManager em;
