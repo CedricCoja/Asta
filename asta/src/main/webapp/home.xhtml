@@ -11,27 +11,37 @@
 	<title>AStA Online-Shop</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
 </h:head>
 <h:body>
-<div>
+	<div>
 		<ui:insert>
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
 		</ui:insert>
 	</div>
-	<h1 class="centerHome">AStA Online-Shop</h1>
-	<h3>
-		<div class="textHome">
-			Hier könnt ihr euch eure Tickets für die Hochschulfeten erwerben <br />oder
-			euch für Veranstaltungen, wie die Grünkohltour, anmelden.
-		</div>
-	</h3>
-	<div class="container">
-		<div class="wrap">
-			<a href="allFeten.xhtml" target="_blank">
-				<div class="first">Tickets kaufen</div>
-			</a>
-		</div>
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+	<div class="vertikal-flex">
+		<span class="w3-text-white w3-hide-small"
+			style="font-size: 100px; font-family: Amatic SC">AStA ONLINE -
+			SHOP</span>
 	</div>
+	<div class="vertikal-flex">
+		<p style="font-size: 36px; font-family: Amatic SC; text-align:center; text-shadow: 3px 3px 4px #000">
+			Hier könnt ihr euch für uns Events anmelden <br /> oder für die
+			Feten, die Tickets erwerben.
+		</p>
+		</div>
+		<div class="vertikal-flex">
+			<p>
+				<a href="allFeten.xhtml" style="font-family:Amatic SC" class="w3-button w3-xxlarge w3-black">Tickets
+					kaufen</a>
+			</p>
+		</div>
+	</header>
+
 </h:body>
 </html>
