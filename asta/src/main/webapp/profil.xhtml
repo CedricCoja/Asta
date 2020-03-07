@@ -12,11 +12,15 @@
 	<title>AStA-#{msg.myProfile}</title>
 	<link href="https://fonts.googleapis.com/css?family=Jura"
 		rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="resources/shop.css" type="text/css" />
+	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
+		type="text/css" />
 </h:head>
 
 <h:body>
-
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+		
 	<div id="content"
 		style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
 		<h1>
@@ -76,11 +80,7 @@
 	<div>
 		<h:panelGroup rendered="#{not empty user}">
 			<p>Welcome, #{user.userID}, #{user.firstName}, #{user.lastName}, #{user.email}, #{user.status}, #{user.role}</p>
-			<h:form>
-				<h:commandButton value="logout" action="#{loginController.logout}" />
-			</h:form>
-		</h:panelGroup>
+					</h:panelGroup>
 	</div>
-
 </h:body>
 </html>
