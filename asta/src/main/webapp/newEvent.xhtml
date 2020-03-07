@@ -7,106 +7,89 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:p="http://primefaces.org/ui">
 
+
+<!-- <f:view locale="en"> -->
 <h:head>
 	<title>AStA-#{msg.newEvent}</title>
 	<link href="https://fonts.googleapis.com/css?family=Jura"
 		rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="resources/shop.css" type="text/css" />
+	<!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
 </h:head>
 
 <h:body>
-<<<<<<< HEAD
-
-	<div id="content"
-		style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
-		<h1>
-			<a style="color: maroon;">#{msg.newEvent}</a>
-		</h1>
-		<ui:insert name="content">
-			<h:form id="form">
-
-				<p:panel id="panel" header="#{msg.newEvent}">
-					<h:panelGrid columns="2">
-						<h:outputLabel value="#{msg.bezeichnung}:" for="bezeichnung" />
-						<h:panelGroup>
-							<p:inputText id="bezeichnung"
-								value="#{eventController.saveEntity.bezeichnung}">
-							</p:inputText>
-							<p:message for="bezeichnung" />
-						</h:panelGroup>
-
-						<h:outputLabel value="#{msg.beschreibung}:" for="beschreibung" />
-						<h:panelGroup>
-							<p:inputText id="beschreibung"
-								value="#{eventController.saveEntity.beschreibung}">
-							</p:inputText>
-							<p:message for="beschreibung" />
-						</h:panelGroup>
-=======
-<div>
+	<div>
 		<ui:insert>
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
 		</ui:insert>
 	</div>
-		<div id="content" style="color: black; font-family: Jura; font-size: 17px; width: 100%; margin: auto;">
-				<h1>
-						<a style="color: maroon;">#{msg.newEvent}</a>
-				</h1>
-				<ui:insert name="content">
-						<h:form id="form">
 
-								<p:panel id="panel" header="#{msg.newEvent}">
-										<h:panelGrid columns="2">
-												<h:outputLabel value="#{msg.designation}:" for="bezeichnung" />
-												<h:panelGroup>
-														<p:inputText id="bezeichnung" value="#{eventController.saveEntity.bezeichnung}">
-														</p:inputText>
-														<p:message for="bezeichnung" />
-												</h:panelGroup>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form id="form">
+				<p:growl id="growl" showDetail="true" sticky="true" />
+				<p:panelGrid var="event" value="#{eventController.events}"
+					styleClass="loginGrid" columns="2" cellpadding="20">
+					<f:facet name="header">#{msg.newEvent}</f:facet>
 
-												<h:outputLabel value="#{msg.description}:" for="beschreibung" />
-												<h:panelGroup>
-														<p:inputText id="beschreibung" value="#{eventController.saveEntity.beschreibung}">
-														</p:inputText>
-														<p:message for="beschreibung" />
-												</h:panelGroup>
->>>>>>> master
+					<p:outputLabel value="#{msg.designation}" for="designation" />
+					<h:panelGroup>
+						<p:inputText id="designation" required="true"
+							value="#{eventController.designation}"
+							requiredMessage="Bezeichnung fehlt">
+						</p:inputText>
+						<h:message for="designation" styleClass="message" />
+					</h:panelGroup>
 
-						<h:outputLabel value="#{msg.place}:" for="place" />
-						<h:panelGroup>
-							<p:inputText id="place"
-								value="#{eventController.saveEntity.place}">
-							</p:inputText>
-							<p:message for="place" />
-						</h:panelGroup>
+					<p:outputLabel value="#{msg.description}" for="description" />
+					<h:panelGroup>
+						<p:inputText id="description" required="true"
+							value="#{eventController.description}"
+							requiredMessage="Beschreibung fehlt">
+						</p:inputText>
+						<h:message for="description" styleClass="message" />
+					</h:panelGroup>
 
-						<h:outputLabel value="#{msg.date}:" for="date" />
-						<h:panelGroup>
-							<p:calendar id="date" value="#{eventController.saveEntity.date}"
-								showOn="button" pattern="dd.MM.yyyy" />
-							<p:message for="date" />
-						</h:panelGroup>
+					<p:outputLabel value="#{msg.date}" for="date" />
+					<h:panelGroup>
+						<p:calendar id="date" required="true"
+							value="#{eventController.date}" requiredMessage="Datum fehlt"
+							showOn="button" pattern="dd.MM.yyyy" />
+						<h:message for="date" styleClass="message" />
+					</h:panelGroup>
 
-						<h:outputLabel value="#{msg.time}:" for="time" />
-						<h:panelGroup>
-							<p:inputText id="time" value="#{eventController.saveEntity.time}"
-								showOn="button" />
-							<p:message for="time" />
-						</h:panelGroup>
-					</h:panelGrid>
+					<p:outputLabel value="#{msg.place}" for="place" />
+					<h:panelGroup>
+						<p:inputText id="place" required="true"
+							value="#{eventController.place}" requiredMessage="Ort fehlt">
+						</p:inputText>
+						<h:message for="place" styleClass="message" />
+					</h:panelGroup>
 
-					<p:commandButton action="#{eventController.saveEvent()}"
-						value="#{msg.save}" ajax="false" />
-					<p:commandButton action="allEvent.xhtml" value="#{msg.cancel}"
-						immediate="true" />
-				</p:panel>
-				
+					<p:outputLabel value="#{msg.time}" for="time" />
+					<h:panelGroup>
+						<p:inputText id="time" required="true"
+							value="#{eventController.time}" requiredMessage="Ort fehlt">
+						</p:inputText>
+						<h:message for="time" styleClass="message" />
+					</h:panelGroup>
+
+				</p:panelGrid>
+				<br />
+
+				<p:commandButton value="#{msg.register}"
+					action="#{eventController.registerEvent()}" ajax="false" />
+				<p:commandButton action="index.xhtml" value="#{msg.cancel}"
+					immediate="true" />
 			</h:form>
-
 		</ui:insert>
-
 		<div class="push"></div>
 	</div>
 
+	<div>
+		<ui:insert>
+			<!-- <ui:include src="/WEB-INF/templates/footer.xhtml" /> -->
+		</ui:insert>
+	</div>
 </h:body>
+<!-- </f:view> -->
 </html>

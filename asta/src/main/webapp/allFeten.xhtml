@@ -23,24 +23,24 @@
 		<h3>Hier könnt ihr eure Tickets für die Hochschulfeten erwerben.</h3>
 	</div>
 	<h:form id="form">
-		<p:dataView var="event" value="#{eventController.events}"
+		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
 
 			<p:dataViewListItem>
-				<h:panelGrid columns="3" style="width:100%" columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-2">
-					<img src="resources/image/#{event.bezeichnung}.png" />
+				<h:panelGrid columns="3" style="width:100%"
+					columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-2">
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="Id:" />
 							<h:outputText value="#{event.eventID}" style="font-weight: bold" />
 
 							<h:outputText value="Bezeichnung:" />
-							<h:outputText value="#{event.bezeichnung}"
+							<h:outputText value="#{event.designation}"
 								style="font-weight: bold" />
 
 							<h:outputText value="Beschreibung:" />
-							<h:outputText value="#{event.beschreibung}"
+							<h:outputText value="#{event.description}"
 								style="font-weight: bold" />
 
 							<h:outputText value="Ort:" />
@@ -53,19 +53,22 @@
 							<h:outputText value="#{event.time}" style="font-weight: bold" />
 						</h:panelGrid>
 					</p:outputPanel>
-				
-						<h:panelGrid>
-							<h3>Tickets</h3>
-							<h:panelGrid columns="1" style="margin-bottom: 10px">
-								<p:inputText id="txt3" value="#{sliderView.number5}" />
-								<p:slider for="txt3" step="1" maxValue="10" />
-							</h:panelGrid>
-							<p:commandButton value="Tickets kaufen" />
+
+					<h:panelGrid>
+						<h3>Tickets</h3>
+						<h:panelGrid columns="1" style="margin-bottom: 10px">
+							<p:inputText id="txt3" value="#{sliderView.number5}" />
+							<p:slider for="txt3" step="1" maxValue="10" />
 						</h:panelGrid>
-				
+						<p:commandButton value="Tickets kaufen" />
+					</h:panelGrid>
+
 				</h:panelGrid>
 			</p:dataViewListItem>
 		</p:dataView>
+
+		<p:commandButton action="#{eventController.generateEvents()}"
+			value="#{msg.save}" ajax="false" />
 	</h:form>
 </body>
 </html>

@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
@@ -32,6 +34,7 @@ public class UserController {
 
 	private DataModel<User> users;
 	private User saveEntity = new User();
+	private List<User> allUser;
 	
 	@Size(min = 3, max = 30)
 	private String firstName;
@@ -74,13 +77,14 @@ public class UserController {
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	public List<User> generateUsers (){
-		Query allUser = em.createQuery("select u from User u ");
-		allUser.setParameter("email", email);
+	public String generateUsers(){
+		Query all = em.createQuery("select u from User u");
 
-		List<User> users = allUser.getResultList();
+		setAllUser(all.getResultList());
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("In der Tabelle sehen Sie " + "alle registrierten Nutzer."));
 		
-		return users;
+		return "allUser";
 	}
 
 	public DataModel<User> getUsers() {
@@ -129,5 +133,13 @@ public class UserController {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<User> getAllUser() {
+		return allUser;
+	}
+
+	public void setAllUser(List<User> allUser) {
+		this.allUser = allUser;
 	}
 }

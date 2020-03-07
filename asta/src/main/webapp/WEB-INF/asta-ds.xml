@@ -26,7 +26,7 @@
     <datasource jndi-name="java:jboss/datasources/astaDS"
         pool-name="asta" enabled="true"
         use-java-context="true">
-        <connection-url>jdbc:h2:mem:astaDS;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false</connection-url>
+        <connection-url>jdbc:h2:~/data/astaDS;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;</connection-url>
         <driver>h2</driver>
         <security>
             <user-name>sa</user-name>

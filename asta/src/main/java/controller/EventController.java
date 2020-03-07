@@ -1,26 +1,50 @@
 
 package controller;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import javax.validation.constraints.Size;
 
 import event.Event;
 
 @ManagedBean(value = "eventController")
 @SessionScoped
 public class EventController {
+
+	@Size(min = 3, max = 20)
+	private String designation;
+
+	@Size(min = 3, max = 255)
+	private String description;
+
+	@Size(min = 3, max = 20)
+	private String place;
+
+	@Temporal(TemporalType.DATE)
+	private Date date;
+
+	@Column(name = "time")
+	private String time;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -29,51 +53,51 @@ public class EventController {
 	private UserTransaction utx;
 
 	private DataModel<Event> events;
-	private Event saveEntity = new Event();
+	
+	private List<Event> allEvents;
 
-	@PostConstruct
-	public void init() {
+	public String registerEvent() {
 		try {
 			utx.begin();
-		} catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-			// TODO Auto-generated catch block
+			Event event = addEvent();
+			em.persist(event);
+			utx.commit();
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(event.getPlace()));
+			return "newEvent";
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		em.persist(new Event("Tour", "ganz coole Tour eigentlich", "Bremerhaven",
-				new GregorianCalendar(1993, 01, 06).getTime(), "19:30"));
-		em.persist(new Event("Orkie", "mit ganz viel Orkan", "Kistnerstraße",
-				new GregorianCalendar(2010, 01, 06).getTime(), "10:45"));
-
-		events = new ListDataModel<Event>();
-
-		events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
-
-		try {
-			try {
-				utx.commit();
-			} catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public String newEvent() {
-		saveEntity = new Event();
 		return "newEvent";
 	}
 
-	public String saveEvent() throws Throwable, SystemException {
-		utx.begin();
-		saveEntity = em.merge(saveEntity);
-		em.persist(saveEntity);
-		events.setWrappedData(em.createNamedQuery("SelectEvent").getResultList());
-		utx.commit();
-		return "allEvent";
+	private Event addEvent() {
+		Event event = new Event();
+		event.setDescription(description);
+		event.setDesignation(designation);
+		event.setDate(date);
+		event.setPlace(place);
+		event.setTime(time);
+		return event;
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public String generateEvents(){
+		Query all = em.createQuery("select e from Event e");
+
+		setAllEvents(all.getResultList());
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
+
+		return "allFeten";
+	}
+	
+	public List<Event> getAllEvents() {
+		return allEvents;
+	}
+
+	public void setAllEvents(List<Event> allEvents) {
+		this.allEvents = allEvents;
 	}
 
 	public DataModel<Event> getEvents() {
@@ -84,11 +108,44 @@ public class EventController {
 		this.events = events;
 	}
 
-	public Event getSaveEntity() {
-		return saveEntity;
+	public String getDesignation() {
+		return designation;
 	}
 
-	public void setSaveEntity(Event saveEntity) {
-		this.saveEntity = saveEntity;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 }

@@ -5,16 +5,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,11 +31,11 @@ public class Event implements Serializable {
 
   @Size(min = 3, max = 20)
   @Column(name = "Bezeichnung")
-  private String bezeichnung;
+  private String designation;
 
   @Size(min = 3, max = 255)
   @Column(name = "Beschreibung")
-  private String beschreibung;
+  private String description;
 
   @Size(min = 3, max = 20)
   @Column(name = "Veranstaltungsort")
@@ -52,9 +48,9 @@ public class Event implements Serializable {
   @Column(name = "time")
   private String time;
 
-  public Event(String bezeichnung, String beschreibung, String place, Date date, String time) {
-    this.bezeichnung = bezeichnung;
-    this.beschreibung = beschreibung;
+  public Event(String designation, String description, String place, Date date, String time) {
+    this.designation = designation;
+    this.description = description;
     this.place = place;
     this.date = date;
     this.time = time;
@@ -72,23 +68,32 @@ public class Event implements Serializable {
     this.eventID = eventID;
   }
 
-  public String getBezeichnung() {
-    return bezeichnung;
-  }
+  
+  public String getDesignation() {
+	return designation;
+}
 
-  public void setBezeichnung(String bezeichnung) {
-    this.bezeichnung = bezeichnung;
-  }
+public void setDesignation(String designation) {
+	this.designation = designation;
+}
 
-  public String getBeschreibung() {
-    return beschreibung;
-  }
+public String getDescription() {
+	return description;
+}
 
-  public void setBeschreibung(String beschreibung) {
-    this.beschreibung = beschreibung;
-  }
+public void setDescription(String description) {
+	this.description = description;
+}
 
-  public String getPlace() {
+public String getTime() {
+	return time;
+}
+
+public void setTime(String time) {
+	this.time = time;
+}
+
+public String getPlace() {
     return place;
   }
 
@@ -102,13 +107,5 @@ public class Event implements Serializable {
 
   public void setDate(Date date) {
     this.date = date;
-  }
-
-  public String gettime() {
-    return time;
-  }
-
-  public void settime(String time) {
-    this.time = time;
   }
 }
