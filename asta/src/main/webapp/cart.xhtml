@@ -17,6 +17,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Jura"
 		rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="resources/shop.css" type="text/css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
 </h:head>
 
 <h:body>
@@ -25,24 +30,31 @@
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
 		</ui:insert>
 	</div>
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+	<div class="vertikal-flex">
+		<span class="w3-text-white w3-hide-small"
+			style="font-size: 100px; font-family: Amatic SC">Dein
+			Warenkorb</span>
+	</div>
+	</header>
+	
+		<p:dataTable var="cart" value="#{cartController.Carts}">
+			<p:column headerText="Event_ID">
+				<h:outputText value="#{cart.eventID}" />
+			</p:column>
 
-	<p:dataTable var="cart" value="#{cartController.Carts}">
+			<p:column headerText="Einzelpreis">
+				<h:outputText value="#{cart.unitPrice}" />
+			</p:column>
 
-		<p:column headerText="Event_ID">
-			<h:outputText value="#{cart.eventID}" />
-		</p:column>
+			<p:column headerText="Menge">
+				<h:outputText value="#{cart.amount}" />
+			</p:column>
 
-		<p:column headerText="Einzelpreis">
-			<h:outputText value="#{cart.unitPrice}" />
-		</p:column>
+			<p:column headerText="Gesamtpreis">
+				<h:outputText value="#{cart.totalPrice}" />
+			</p:column>
+		</p:dataTable>
 
-		<p:column headerText="Menge">
-			<h:outputText value="#{cart.amount}" />
-		</p:column>
-		
-		<p:column headerText="Gesamtpreis">
-			<h:outputText value="#{cart.totalPrice}" />
-		</p:column>
-	</p:dataTable>
 </h:body>
 </html>

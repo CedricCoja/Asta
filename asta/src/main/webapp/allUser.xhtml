@@ -12,6 +12,11 @@
 		type="text/css" />
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
+			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
 	<div>
 		<ui:insert>
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
@@ -29,6 +34,13 @@
 		<ui:insert name="header">
 		</ui:insert>
 	</div>
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+	<div class="vertikal-flex">
+		<span class="w3-text-white w3-hide-small"
+			style="font-size: 100px; font-family: Amatic SC">Nutzerverwaltung</span>
+	</div>
+	</header>
+	<div class="vertikal-flex">
 	<div id="content">
 		<ui:insert name="content">
 				<p:dataTable var="user" value="#{userController.allUser}" headerClass="header">
@@ -61,6 +73,7 @@
 				<p:commandButton action="#{userController.generateUsers()}"
 					value="#{msg.save}" ajax="false" />
 	</h:form>
+	</div>
 	</div>
 	<div id="footer">
 		<ui:insert name="footer">

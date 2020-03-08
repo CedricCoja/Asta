@@ -1,93 +1,104 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:f="http://java.sun.com/jsf/core"
-  xmlns:c="http://java.sun.com/jsp/jstl/core"
-  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-  xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
 
 
 <!-- <f:view locale="en"> -->
 <h:head>
-  <title>AStA-#{msg.register}</title>
-  <link href="https://fonts.googleapis.com/css?family=Jura"
-    rel="stylesheet" type="text/css" />
-  <!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
+	<title>AStA-#{msg.register}</title>
+	<link href="https://fonts.googleapis.com/css?family=Jura"
+		rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
+	<!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
 </h:head>
 
 <h:body>
-<div>
+	<div>
 		<ui:insert>
 			<ui:include src="/WEB-INF/headermenubar.xhtml" />
 		</ui:insert>
 	</div>
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+		<div class="vertikal-flex">
+			<span class="w3-text-white w3-hide-small"
+				style="font-size: 100px; font-family: Amatic SC">Registrieren</span>
+		</div>
+	</header>
+	<div class="vertikal-flex">
+		<div id="content">
+			<ui:insert name="content">
+				<h:form id="form">
+					<p:growl id="growl" showDetail="true" sticky="true" />
+					<p:panelGrid var="user" value="#{userController.users}"
+						styleClass="loginGrid" columns="2" cellpadding="20">
+						<f:facet name="header">#{msg.register}</f:facet>
 
-  <div id="content">
-    <ui:insert name="content">
-      <h:form id="form">
-        <p:growl id="growl" showDetail="true" sticky="true" />
-        <p:panelGrid var="user" value="#{userController.users}"
-          styleClass="loginGrid" columns="2" cellpadding="20">
-                  <f:facet name="header">#{msg.register}</f:facet>
+						<p:outputLabel value="#{msg.firstName}" for="firstName" />
+						<h:panelGroup>
+							<p:inputText id="firstName" required="true"
+								value="#{registerController.firstName}"
+								requiredMessage="Vorname fehlt">
+							</p:inputText>
+							<h:message for="firstName" styleClass="message" />
+						</h:panelGroup>
 
-          <p:outputLabel value="#{msg.firstName}" for="firstName" />
-          <h:panelGroup>
-            <p:inputText id="firstName" required="true"
-              value="#{registerController.firstName}"
-              requiredMessage="Vorname fehlt">
-            </p:inputText>
-            <h:message for="firstName" styleClass="message" />
-          </h:panelGroup>
+						<p:outputLabel value="#{msg.lastName}" for="lastName" />
+						<h:panelGroup>
+							<p:inputText id="lastName" required="true"
+								value="#{registerController.lastName}"
+								requiredMessage="Nachname fehlt">
+							</p:inputText>
+							<h:message for="lastName" styleClass="message" />
+						</h:panelGroup>
 
-          <p:outputLabel value="#{msg.lastName}" for="lastName" />
-          <h:panelGroup>
-            <p:inputText id="lastName" required="true"
-              value="#{registerController.lastName}"
-              requiredMessage="Nachname fehlt">
-            </p:inputText>
-            <h:message for="lastName" styleClass="message" />
-          </h:panelGroup>
+						<p:outputLabel value="#{msg.email}" for="email" />
+						<h:panelGroup>
+							<p:inputText id="email" required="true"
+								value="#{registerController.email}"
+								requiredMessage="E-Mail fehlt">
+								<f:validator validatorId="myValidator" />
+							</p:inputText>
+							<h:message for="email" styleClass="message" />
+						</h:panelGroup>
 
-          <p:outputLabel value="#{msg.email}" for="email" />
-          <h:panelGroup>
-            <p:inputText id="email" required="true"
-              value="#{registerController.email}"
-              requiredMessage="E-Mail fehlt">
-              <f:validator validatorId="myValidator"/>
-            </p:inputText>
-            <h:message for="email" styleClass="message" />
-          </h:panelGroup>
+						<p:outputLabel for="pwd_1" value="#{msg.password}" />
+						<h:panelGroup>
+							<p:password id="pwd_1" value="#{registerController.password}"
+								match="pwd_2" label="Password_1" required="true" feedback="true" />
+						</h:panelGroup>
 
-          <p:outputLabel for="pwd_1" value="#{msg.password}" />
-          <h:panelGroup>
-            <p:password id="pwd_1" value="#{registerController.password}"
-              match="pwd_2" label="Password_1" required="true" feedback="true" />
-          </h:panelGroup>
+						<p:outputLabel for="pwd_2" value="#{msg.password}" />
+						<h:panelGroup>
+							<p:password id="pwd_2" value="#{registerController.password}"
+								label="Password_2" required="true" />
+						</h:panelGroup>
 
-          <p:outputLabel for="pwd_2" value="#{msg.password}" />
-          <h:panelGroup>
-            <p:password id="pwd_2" value="#{registerController.password}"
-              label="Password_2" required="true" />
-          </h:panelGroup>
+					</p:panelGrid>
+					<br />
 
-        </p:panelGrid>
-        <br />
-
-        <p:commandButton value="#{msg.register}"
-          action="#{registerController.registerUser()}" ajax="false" />
-        <p:commandButton action="index.xhtml" value="#{msg.cancel}"
-          immediate="true" />
-      </h:form>
-    </ui:insert>
-    <div class="push"></div>
-  </div>
-
-  <div>
-    <ui:insert>
-      <!-- <ui:include src="/WEB-INF/templates/footer.xhtml" /> -->
-    </ui:insert>
-  </div>
+					<p:commandButton value="#{msg.register}"
+						action="#{registerController.registerUser()}" ajax="false" />
+					<p:commandButton action="index.xhtml" value="#{msg.cancel}"
+						immediate="true" />
+				</h:form>
+			</ui:insert>
+			<div class="push"></div>
+		</div>
+	</div>
+	<div>
+		<ui:insert>
+			<!-- <ui:include src="/WEB-INF/templates/footer.xhtml" /> -->
+		</ui:insert>
+	</div>
 </h:body>
 <!-- </f:view> -->
 </html>
