@@ -18,7 +18,7 @@
 	<h:outputStylesheet name="primeicons/primeicons.css"
 		library="primefaces" />
 </h:head>
-<body>
+<h:body>
 	<div class="menubar">
 		<h:form>
 			<p:growl id="messages" />
@@ -32,8 +32,6 @@
 					icon="pi pi-user" />
 				<p:menuitem value="#{msg.aboutUs} " action="ueberuns.xhtml"
 					icon="pi pi-bookmark" />
-
-
 				<f:facet name="options">
 					<p:commandButton rendered="#{not empty user}" value="#{msg.logout}"
 						action="#{loginController.logout()}" icon="pi pi-sign-out" />
@@ -47,5 +45,5 @@
 			</p:menubar>
 		</h:form>
 	</div>
-</body>
+</h:body>
 </html>

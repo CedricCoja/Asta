@@ -29,7 +29,6 @@
 			style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
 			</div>
 			</header>
-	<div class="vertikal-flex">
 	<h:form id="form">
 		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
@@ -78,6 +77,5 @@
 		<p:commandButton action="#{eventController.generateEvents()}"
 			value="#{msg.save}" ajax="false" />
 	</h:form>
-	</div>
 </body>
 </html>
