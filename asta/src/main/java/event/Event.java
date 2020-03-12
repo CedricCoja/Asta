@@ -3,7 +3,6 @@ package event;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-
 
 @NamedQuery(name = "SelectEvent", query = "Select e from Event e")
 @Entity
@@ -68,32 +66,31 @@ public class Event implements Serializable {
     this.eventID = eventID;
   }
 
-  
   public String getDesignation() {
-	return designation;
-}
+    return designation;
+  }
 
-public void setDesignation(String designation) {
-	this.designation = designation;
-}
+  public void setDesignation(String designation) {
+    this.designation = designation;
+  }
 
-public String getDescription() {
-	return description;
-}
+  public String getDescription() {
+    return description;
+  }
 
-public void setDescription(String description) {
-	this.description = description;
-}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-public String getTime() {
-	return time;
-}
+  public String getTime() {
+    return time;
+  }
 
-public void setTime(String time) {
-	this.time = time;
-}
+  public void setTime(String time) {
+    this.time = time;
+  }
 
-public String getPlace() {
+  public String getPlace() {
     return place;
   }
 

@@ -45,6 +45,7 @@ public class LoginController {
       FacesContext context = FacesContext.getCurrentInstance();
       context.addMessage(null, new FacesMessage("Successful", "Willkommen " + firstName));
       context.getExternalContext().getSessionMap().put("user", user);
+      UserController.setUser(user);
       return "/home.xhtml?faces-redirect=true";
     } else {
       FacesContext context = FacesContext.getCurrentInstance();

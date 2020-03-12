@@ -38,6 +38,11 @@
   <managed-bean-class>controller.RegisterController</managed-bean-class>
   <managed-bean-scope>request</managed-bean-scope>
  </managed-bean>
+  <managed-bean>
+  <managed-bean-name>indexController</managed-bean-name>
+  <managed-bean-class>controller.IndexController</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <validator>
   <validator-id>myValidator</validator-id>
   <validator-class>validator.MyValidator</validator-class>
