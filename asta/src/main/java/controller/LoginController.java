@@ -70,7 +70,7 @@ public class LoginController {
 
   public String logout() {
     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    return "/home.xhtml?faces-redirect=true";
+    return "/index.xhtml?faces-redirect=true";
   }
 
   public String getEmail() {

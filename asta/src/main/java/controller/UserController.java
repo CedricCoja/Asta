@@ -46,17 +46,27 @@ public class UserController {
     return user;
   }
 
+  public String deleteProfil() {
+
+    try {
+      user = getUser();
+      utx.begin();
+      user = em.merge(user);
+      em.remove(user);
+      utx.commit();
+    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+      e.printStackTrace();
+    }
+    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    return "/index.xhtml?faces-redirect=true";
+  }
+
   public String saveProfil() {
 
     try {
       user = getUser();
-      System.out.println("Drecksscheiße!!!");
-      System.out.println(user.getUserID());
-      System.out.println(user.getFirstName());
       utx.begin();
       user = em.merge(user);
-      em.remove(user);
-      //users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
       utx.commit();
     } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
       e.printStackTrace();
