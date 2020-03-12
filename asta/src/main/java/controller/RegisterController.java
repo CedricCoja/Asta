@@ -2,8 +2,10 @@
 package controller;
 
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -44,7 +46,8 @@ public class RegisterController {
         utx.commit();
         return "logintry";
       } else {
-        //
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("FAILURE", "Es existiert bereits ein Nutzer mit dieser E-Mail Adresse!"));
       }
     } catch (Exception e) {
       e.printStackTrace();
