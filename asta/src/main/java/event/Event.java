@@ -46,12 +46,16 @@ public class Event implements Serializable {
   @Column(name = "time")
   private String time;
 
-  public Event(String designation, String description, String place, Date date, String time) {
+  @Column(name = "price")
+  private double price;
+
+  public Event(String designation, String description, String place, Date date, String time, double price) {
     this.designation = designation;
     this.description = description;
     this.place = place;
     this.date = date;
     this.time = time;
+    this.price = price;
   }
 
   public Event() {
@@ -105,4 +109,13 @@ public class Event implements Serializable {
   public void setDate(Date date) {
     this.date = date;
   }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
 }

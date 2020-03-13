@@ -50,8 +50,7 @@ public class IndexController {
   }
 
   public String register() {
-    System.out.println("Hallo");
-    return "allUser";
+    return "register";
   }
 
   public String login() {

@@ -31,21 +31,6 @@ public class UserController {
 
   private static User user;
 
-  // public String deleteProfil() throws Throwable, SystemException {
-  // User user;
-  // em.remove(user);
-  // users.setWrappedData(em.createNamedQuery("SelectUser").getResultList());
-  // return "index";
-  // }
-
-  public static void setUser(User login) {
-    user = login;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
   public String deleteProfil() {
 
     try {
@@ -93,4 +78,11 @@ public class UserController {
     this.allUser = allUser;
   }
 
+  public static void setUser(User login) {
+    user = login;
+  }
+
+  public User getUser() {
+    return user;
+  }
 }

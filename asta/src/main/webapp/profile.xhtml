@@ -45,6 +45,7 @@
 												<h:outputLabel value="#{msg.newEmail}" />
 												<h:panelGroup>
 														<p:inputText id="email" required="false" requiredMessage="E-mail fehlt" value="#{userController.user.email}">
+																<f:validator validatorId="emailValidator" />
 														</p:inputText>
 														<h:message for="email" styleClass="message" />
 												</h:panelGroup>
