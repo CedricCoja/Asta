@@ -34,41 +34,41 @@
 
 												<p:outputLabel value="#{msg.designation}" for="designation" />
 												<h:panelGroup>
-														<p:inputText id="designation" required="true" value="#{eventController.event.designation}" requiredMessage="Bezeichnung fehlt">
+														<p:inputText id="designation" required="true" value="#{eventController.designation}" requiredMessage="Bezeichnung fehlt">
 														</p:inputText>
 														<h:message for="designation" styleClass="message" />
 												</h:panelGroup>
 
 												<p:outputLabel value="#{msg.description}" for="description" />
 												<h:panelGroup>
-														<p:inputText id="description" required="true" value="#{eventController.event.description}" requiredMessage="Beschreibung fehlt">
+														<p:inputText id="description" required="true" value="#{eventController.description}" requiredMessage="Beschreibung fehlt">
 														</p:inputText>
 														<h:message for="description" styleClass="message" />
 												</h:panelGroup>
 
 												<p:outputLabel value="#{msg.date}" for="date" />
 												<h:panelGroup>
-														<p:calendar id="date" required="true" value="#{eventController.event.date}" requiredMessage="Datum fehlt" showOn="button" pattern="dd.MM.yyyy" />
+														<p:calendar id="date" required="true" value="#{eventController.date}" requiredMessage="Datum fehlt" showOn="button" pattern="dd.MM.yyyy" />
 														<h:message for="date" styleClass="message" />
 												</h:panelGroup>
 
 												<p:outputLabel value="#{msg.place}" for="place" />
 												<h:panelGroup>
-														<p:inputText id="place" required="true" value="#{eventController.event.place}" requiredMessage="Ort fehlt">
+														<p:inputText id="place" required="true" value="#{eventController.place}" requiredMessage="Ort fehlt">
 														</p:inputText>
 														<h:message for="place" styleClass="message" />
 												</h:panelGroup>
 
 												<p:outputLabel value="#{msg.time}" for="time" />
 												<h:panelGroup>
-														<p:inputText id="time" required="true" value="#{eventController.event.time}" requiredMessage="Ort fehlt">
+														<p:inputText id="time" required="true" value="#{eventController.time}" requiredMessage="Ort fehlt">
 														</p:inputText>
 														<h:message for="time" styleClass="message" />
 												</h:panelGroup>
 
 												<p:outputLabel value="#{msg.price}" for="price" />
 												<h:panelGroup>
-														<p:inputText id="price" required="true" value="#{eventController.event.price}" requiredMessage="Preis fehlt">
+														<p:inputText id="price" required="true" value="#{eventController.price}" requiredMessage="Preis fehlt">
 														</p:inputText>
 														<h:message for="price" styleClass="message" />
 												</h:panelGroup>
