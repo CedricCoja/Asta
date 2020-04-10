@@ -21,113 +21,112 @@ import user.User;
 @ManagedBean
 @SessionScoped
 public class RegisterController {
-  @Size(min = 3, max = 30)
-  private String firstName;
-  @Size(min = 3, max = 30)
-  private String lastName;
-  @Size(min = 6, max = 30)
-  private String email;
-  private String password;
+	@Size(min = 3, max = 30)
+	private String firstName;
+	@Size(min = 3, max = 30)
+	private String lastName;
+	@Size(min = 6, max = 30)
+	private String email;
+	private String password;
 
-  @PersistenceContext
-  private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-  @Resource
-  private UserTransaction utx;
+	@Resource
+	private UserTransaction utx;
 
-  public String registerUser() {
-    try {
-      String search = "email";
-      Query query = em.createQuery("select u from User u " + "where u.email = :" + search);
-      query.setParameter(search, email);
-      password = bcryptHash(password);
-      FacesContext context_pw = FacesContext.getCurrentInstance();
-      context_pw.addMessage(null, new FacesMessage("HINT", "PW: " + password));
-      if (query.getResultList().size() == 0) {
-        utx.begin();
-        User user = addUser();
-        em.persist(user);
-        utx.commit();
-        return "logintry";
-      } else {
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("FAILURE", "Es existiert bereits ein Nutzer mit dieser E-Mail Adresse!"));
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return "register";
-  }
+	public String registerUser() {
+		try {
+			String search = "email";
+			Query query = em.createQuery("select u from User u " + "where u.email = :" + search);
+			query.setParameter(search, email);
+			password = bcryptHash(password);
+			if (query.getResultList().size() == 0) {
+				utx.begin();
+				User user = addUser();
+				em.persist(user);
+				utx.commit();
+				return "logintry";
+			} else {
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null,
+						new FacesMessage("FAILURE", "Es existiert bereits ein Nutzer mit dieser E-Mail Adresse!"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "register";
+	}
 
-  public static String bcryptHash(String enteredPW) {
+	public static String bcryptHash(String enteredPW) {
 
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String hashedpassword = passwordEncoder.encode(enteredPW);
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedpassword = passwordEncoder.encode(enteredPW);
 
-    return hashedpassword;
-  }
+		return hashedpassword;
+	}
 
-  private User addUser() {
-    User user = new User();
-    user.setFirstName(firstName);
-    user.setLastName(lastName);
-    user.setEmail(email);
-    user.setPassword(password);
-    user.setRole(Role.USER);
-    if (email.contains("hs-bremerhaven.de")) {
-      user.setStatus(Status.STUDENT);
-    } else {
-      user.setStatus(Status.EXTERN);
-    }
-    return user;
-  }
+	private User addUser() {
+		User user = new User();
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setRole(Role.USER);
+		if (email.contains("hs-bremerhaven.de")) {
+			user.setStatus(Status.STUDENT);
+		} else {
+			user.setStatus(Status.EXTERN);
+		}
+		return user;
+	}
 
-  public String getFirstName() {
-    return firstName;
-  }
+	public String getFirstName() {
+		return firstName;
+	}
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-  public String getLastName() {
-    return lastName;
-  }
+	public String getLastName() {
+		return lastName;
+	}
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-  public String getEmail() {
-    return email;
-  }
+	public String getEmail() {
+		return email;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-  public String getPassword() {
-    return password;
-  }
+	public String getPassword() {
+		return password;
+	}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-  public EntityManager getEm() {
-    return em;
-  }
+	public EntityManager getEm() {
+		return em;
+	}
 
-  public void setEm(EntityManager em) {
-    this.em = em;
-  }
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
-  public UserTransaction getUtx() {
-    return utx;
-  }
+	public UserTransaction getUtx() {
+		return utx;
+	}
 
-  public void setUtx(UserTransaction utx) {
-    this.utx = utx;
-  }
+	public void setUtx(UserTransaction utx) {
+		this.utx = utx;
+	}
 
 }

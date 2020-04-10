@@ -50,6 +50,7 @@ public class UserController {
 
     try {
       user = getUser();
+      user.setPassword(RegisterController.bcryptHash(user.getPassword()));
       utx.begin();
       user = em.merge(user);
       utx.commit();

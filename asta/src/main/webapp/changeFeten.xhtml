@@ -10,7 +10,7 @@
 	<title>Feten - Tickets</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-					<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Raleway" />
 	<link rel="stylesheet"
@@ -24,18 +24,18 @@
 	</div>
 
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-	<div class="vertikal-flex">
-		<span class="w3-text-white w3-hide-small"
-			style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
-			</div>
-			</header>
+		<div class="vertikal-flex">
+			<span class="w3-text-white w3-hide-small"
+				style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
+		</div>
+	</header>
 	<h:form id="form">
 		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
 
 			<p:dataViewListItem>
-				<h:panelGrid columns="3" style="width:100%"
+				<h:panelGrid columns="5" style="width:100%"
 					columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-2">
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="5">
@@ -70,6 +70,15 @@
 						<p:commandButton value="#{msg.buyTickets}" />
 					</h:panelGrid>
 
+					<h:panelGrid>
+						<h3>Event löschen</h3>
+						<p:commandButton value="#{msg.delete}" />
+					</h:panelGrid>
+
+					<h:panelGrid>
+						<h3>Eventänderungen übernehmen</h3>
+						<p:commandButton value="#{msg.change}"/>
+					</h:panelGrid>
 				</h:panelGrid>
 			</p:dataViewListItem>
 		</p:dataView>
