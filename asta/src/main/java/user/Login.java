@@ -1,51 +1,45 @@
 
 package user;
 
-public abstract class Login extends LoginData {
-  private String passwordExtension;
-  private byte[] passwordHash;
-  private String hashMethode;
-  private String password;
+import java.io.UnsupportedEncodingException;
+import java.security.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+public abstract class Login {
+	private String password;
+	private byte[] hashPassword;
 /*
-  public Login(String password) {
-    StringBuilder buildAddToPassword = new StringBuilder(LoginData.NORMALLENGTH);
-    for (int i = 0; i < LoginData.NORMALLENGTH; ++i) {
-      buildAddToPassword.append((char) (Math.random() * Short.MAX_VALUE));
-    }
-    passwordExtension = buildAddToPassword.toString();
-    hashMethode = LoginData.NORMALLENGTH;
-    if (password != null) {
-      setPassword(password);
-    }
-  }
+	public String getHashedPassword(String enteredPassword) {
+		byte[] bytesOfMessage;
+		try {
+			bytesOfMessage = enteredPassword.getBytes("UTF-8");
 
-  public boolean testPassword(String input) {
-    byte[] hashPassword;
-    if (hashPassword == null || !match(hashPassword, hashPassword(input))) {
-      return false;
-    }
-    if (!hashMethode.equals(LoginData.STANDARD_HASH)) {
-      hashMethode = LoginData.STANDARD_HASH;
-      hashPassword = hashPassword(input);
-    }
-    return true;
-  }
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			hashPassword = md.digest(bytesOfMessage);
+
+			// password = DigestUtils.md5Hex(hashPassword);
+
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+
+		return password;
+	}
+
+	public static String bcryptHash(String enteredPW) {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String password = passwordEncoder.encode(enteredPW);
+
+		return password;
+	}
 */
-  private boolean match(byte[] match, byte[] with) {
-    for (int i = 0; i < match.length; ++i) {
-      if (match[i] != with[i]) {
-        return false;
-      }
-    }
-    return true;
-  }
-  
-  public void setPassword(String newPassword) {
-    this.password = newPassword;
-  }
+	public void setPassword(String newPassword) {
+		this.password = newPassword;
+	}
 
-  public boolean setPassword(String newPassword, String password) {
-    // TODO Auto-generated method stub
-    return false;
-  }
+	public boolean setPassword(String newPassword, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
