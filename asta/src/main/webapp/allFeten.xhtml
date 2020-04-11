@@ -47,27 +47,27 @@
 					columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-2">
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="5">
-							<h:outputText value="Id:" />
+							<h:outputText value="#{msg.eventID}: " />
 							<h:outputText value="#{event.eventID}" style="font-weight: bold" />
 
-							<h:outputText value="Bezeichnung:" />
+							<h:outputText value="#{msg.designation}: " />
 							<h:outputText value="#{event.designation}"
 								style="font-weight: bold" />
 
-							<h:outputText value="Beschreibung:" />
+							<h:outputText value="#{msg.description}: " />
 							<h:outputText value="#{event.description}"
 								style="font-weight: bold" />
 
-							<h:outputText value="Ort:" />
+							<h:outputText value="#{msg.place}: " />
 							<h:outputText value="#{event.place}" style="font-weight: bold" />
 
-							<h:outputText value="Datum:" />
+							<h:outputText value="#{msg.date}: " />
 							<h:outputText value="#{event.date}" style="font-weight: bold" />
 
-							<h:outputText value="Uhrzeit:" />
+							<h:outputText value="#{msg.time}: " />
 							<h:outputText value="#{event.time}" style="font-weight: bold" />
 
-							<h:outputText value="Preis: " />
+							<h:outputText value="#{msg.price}:  " />
 							<h:outputText value="#{event.price}" style="font-weight: bold" />
 						</h:panelGrid>
 					</p:outputPanel>

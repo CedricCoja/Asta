@@ -4,18 +4,15 @@ package controller;
 import java.util.List;
 
 import javax.annotation.ManagedBean;
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
+
 import javax.transaction.UserTransaction;
 
 import cart.Cart;
@@ -35,26 +32,17 @@ public class CartController {
 	private List<Cart> allCarts;
 
 	private int amount;
-	/*
-	 * private Integer eventID;
-	 * 
-	 * private String eventDescription;
-	 * 
-	 * private double unitPrice;
-	 * 
-	 * private double totalPrice;
-	 */
 
-	public String registerCart(Integer eid, String edes, double up, int am) {
+	public String registerCart(Integer event_id, String event_des, double unit_price, int amount) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.addMessage(null, new FacesMessage("läuft"));
 		try {
 			utx.begin();
-			Cart newCart = addCart(eid, edes, up, am);
+			Cart newCart = addCart(event_id, event_des, unit_price, amount);
 			em.persist(newCart);
 			utx.commit();
 			
-			context.addMessage(null, new FacesMessage("Die Tickets für " + newCart.getEventDescription()
+			context.addMessage(null, new FacesMessage("Die Tickets für " + newCart.getEventDesignation()
 					+ " wurden erfolgreich ihrem Warenkorb hinzugefügt!"));
 			generateCart();
 			return "newCart";
@@ -64,13 +52,13 @@ public class CartController {
 		return "newCart";
 	}
 
-	private Cart addCart(Integer eid, String edes, double up, int am) {
+	private Cart addCart(Integer event_id, String event_des, double unit_price, int amount) {
 		Cart newCart = new Cart();
-		newCart.setEventID(eid);
-		newCart.setEventDescription(edes);
-		newCart.setUnitPrice(up);
-		newCart.setAmount(am);
-		newCart.setTotalPrice(Math.round(up * am));
+		newCart.setEventID(event_id);
+		newCart.setEventDesignation(event_des);
+		newCart.setUnitPrice(unit_price);
+		newCart.setAmount(amount);
+		newCart.setTotalPrice((double) Math.round(unit_price * amount * 100) / 100);
 		return newCart;
 	}
 

@@ -43,25 +43,25 @@
 		<ui:insert name="content">
 				<p:dataTable var="user" value="#{userController.allUser}" headerClass="header">
 					<f:facet name="header">Nutzer</f:facet>
-					<p:column headerText="ID">
+					<p:column headerText="#{msg.userID}">
 						<h:outputText value="#{user.userID}" />
 					</p:column>
-					<p:column headerText="Vorname">
+					<p:column headerText="#{msg.firstName}">
 						<h:outputText value="#{user.firstName}" />
 					</p:column>
-					<p:column headerText="Nachname">
+					<p:column headerText="#{msg.lastName}">
 						<h:outputText value="#{user.lastName}" />
 					</p:column>
-					<p:column headerText="E-Mail">
+					<p:column headerText="#{msg.email}">
 						<h:outputText value="#{user.email}" />
 					</p:column>
-					<p:column headerText="Password">
+					<p:column headerText="#{msg.password}">
 						<h:outputText value="#{user.password}" />
 					</p:column>
-					<p:column headerText="Status">
+					<p:column headerText="#{msg.status}">
 						<h:outputText value="#{user.status}" />
 					</p:column>
-					<p:column headerText="Rolle">
+					<p:column headerText="#{msg.role}">
 						<h:outputText value="#{user.role}" />
 					</p:column>
 				</p:dataTable>

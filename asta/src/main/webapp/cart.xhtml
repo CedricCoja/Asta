@@ -36,17 +36,17 @@
 	<h:form>
 		<div class="vertikal-flex">
 			<p:dataTable var="cart" value="#{cartController.allCarts}">
-				<p:column headerText="Event_ID">
+				<p:column headerText="#{msg.eventID}">
 					<h:outputText value="#{cart.eventID}" />
 				</p:column>
 
-				<p:column headerText="Ticket Info">
+				<p:column headerText="#{msg.ticketInfo}">
 					<p:button outcome="allFeten" value="Veranstaltung ansehen">
 					</p:button>
 				</p:column>
 
-				<p:column headerText="Beschreibung">
-					<h:outputText value="#{cart.eventDescription}" />
+				<p:column headerText="#{msg.designation}">
+					<h:outputText value="#{cart.eventDesignation}" />
 				</p:column>
 
 				<p:column headerText="Einzelpreis">
