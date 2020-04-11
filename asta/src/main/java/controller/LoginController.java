@@ -48,7 +48,7 @@ public class LoginController {
 		if (encoder.matches(password, test_pw)) {
 			
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage("works", "pw: " + test_pw));
+			context.addMessage(null, new FacesMessage("SUCCESS", "pw: " + test_pw));
 			
 			if (users.size() == 1) {
 				user = users.get(0);

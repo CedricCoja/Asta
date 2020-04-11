@@ -25,6 +25,9 @@ public class Cart implements Serializable {
 	@Column(name = "Event_ID", nullable = false)
 	private Integer eventID;
 
+	@Column(name = "Event_Description")
+	private String eventDescription;
+	
 	@Column(name = "Einzelpreis")
 	private double unitPrice;
 
@@ -37,9 +40,10 @@ public class Cart implements Serializable {
 	public Cart() {
 	}
 
-	public Cart(Integer eventID, double unitPrice, int amount, double totalPrice) {
+	public Cart(Integer eventID, String eventDescription, double unitPrice, int amount, double totalPrice) {
 
 		this.eventID = eventID;
+		this.eventDescription = eventDescription;
 		this.unitPrice = unitPrice;
 		this.amount = amount;
 		this.totalPrice = totalPrice;
@@ -59,6 +63,15 @@ public class Cart implements Serializable {
 
 	public void setEventID(Integer eventID) {
 		this.eventID = eventID;
+	}
+
+	
+	public String getEventDescription() {
+		return eventDescription;
+	}
+
+	public void setEventDescription(String eventDescription) {
+		this.eventDescription = eventDescription;
 	}
 
 	public double getUnitPrice() {

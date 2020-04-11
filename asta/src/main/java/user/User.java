@@ -115,14 +115,6 @@ public class User implements Serializable {
     return password;
   }
 
-  public static String bcryptHash(String enteredPW) {
-
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String hashedpassword = passwordEncoder.encode(enteredPW);
-
-    return hashedpassword;
-  }
-
   public void setPassword(String password) {
     this.password = password;
   }

@@ -1,14 +1,19 @@
 
 package controller;
 
+import java.util.List;
+
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
@@ -19,83 +24,123 @@ import cart.Cart;
 @SessionScoped
 public class CartController {
 
-  @PersistenceContext
-  private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-  @Resource
-  private UserTransaction utx;
+	@Resource
+	private UserTransaction utx;
 
-  private DataModel<Cart> carts;
-  private Cart saveEntity = new Cart();
+	private DataModel<Cart> carts;
 
-  @PostConstruct
-  public void init() {
-    try {
-      utx.begin();
-    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+	private List<Cart> allCarts;
 
-    carts = new ListDataModel<Cart>();
-    carts.setWrappedData(em.createNamedQuery("SelectTicket").getResultList());
+	private int amount;
+	/*
+	 * private Integer eventID;
+	 * 
+	 * private String eventDescription;
+	 * 
+	 * private double unitPrice;
+	 * 
+	 * private double totalPrice;
+	 */
 
-    try {
-      try {
-        utx.commit();
-      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+	public String registerCart(Integer eid, String edes, double up, int am) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("läuft"));
+		try {
+			utx.begin();
+			Cart newCart = addCart(eid, edes, up, am);
+			em.persist(newCart);
+			utx.commit();
+			
+			context.addMessage(null, new FacesMessage("Die Tickets für " + newCart.getEventDescription()
+					+ " wurden erfolgreich ihrem Warenkorb hinzugefügt!"));
+			generateCart();
+			return "newCart";
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "newCart";
+	}
 
-  public String newCart() {
-    saveEntity = new Cart();
-    return "newTicket";
-  }
+	private Cart addCart(Integer eid, String edes, double up, int am) {
+		Cart newCart = new Cart();
+		newCart.setEventID(eid);
+		newCart.setEventDescription(edes);
+		newCart.setUnitPrice(up);
+		newCart.setAmount(am);
+		newCart.setTotalPrice(Math.round(up * am));
+		return newCart;
+	}
 
-  public String saveCart() {
-    try {
-      utx.begin();
-    } catch (javax.transaction.NotSupportedException | javax.transaction.SystemException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    saveEntity = em.merge(saveEntity);
-    em.persist(saveEntity);
-    carts.setWrappedData(em.createNamedQuery("SelectTicket").getResultList());
-    try {
-      try {
-        utx.commit();
-      } catch (javax.transaction.RollbackException | javax.transaction.SystemException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    } catch (SecurityException | IllegalStateException | HeuristicMixedException | HeuristicRollbackException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    return "allEvent";
-  }
+	@SuppressWarnings({ "unchecked" })
+	public String generateCart() {
+		Query all = em.createQuery("Select t from Cart t");
 
-  public DataModel<Cart> getCarts() {
-    return carts;
-  }
+		setAllCarts(all.getResultList());
+		/*
+		 * FacesContext context = FacesContext.getCurrentInstance();
+		 * context.addMessage(null, new FacesMessage(allCarts.get(0).getPlace()));
+		 */
 
-  public void setCarts(DataModel<Cart> carts) {
-    this.carts = carts;
-  }
+		return "cart";
+	}
 
-  public Cart getSaveEntity() {
-    return saveEntity;
-  }
+	public DataModel<Cart> getCarts() {
+		return carts;
+	}
 
-  public void setSaveEntity(Cart saveEntity) {
-    this.saveEntity = saveEntity;
-  }
+	public void setCarts(DataModel<Cart> carts) {
+		this.carts = carts;
+	}
 
+	public List<Cart> getAllCarts() {
+		return allCarts;
+	}
+
+	public void setAllCarts(List<Cart> allCarts) {
+		this.allCarts = allCarts;
+	}
+/*
+	public Integer getEventID() {
+		return eventID;
+	}
+
+	public void setEventID(Integer eventID) {
+		this.eventID = eventID;
+	}
+
+	public String getEventDescription() {
+		return eventDescription;
+	}
+
+	public void setEventDescription(String eventDescription) {
+		this.eventDescription = eventDescription;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+*/
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+/*
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+*/
 }

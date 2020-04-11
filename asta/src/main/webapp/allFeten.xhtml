@@ -10,11 +10,19 @@
 	<title>Feten - Tickets</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-					<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Raleway" />
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
+
+	<style>
+		.ui-g {
+			background-color: lightgrey;
+			padding: 10px;
+		}
+	</style>
+
 </h:head>
 <body>
 	<div>
@@ -24,11 +32,11 @@
 	</div>
 
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-	<div class="vertikal-flex">
-		<span class="w3-text-white w3-hide-small"
-			style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
-			</div>
-			</header>
+		<div class="vertikal-flex">
+			<span class="w3-text-white w3-hide-small"
+				style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
+		</div>
+	</header>
 	<h:form id="form">
 		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
@@ -58,20 +66,28 @@
 
 							<h:outputText value="Uhrzeit:" />
 							<h:outputText value="#{event.time}" style="font-weight: bold" />
+
+							<h:outputText value="Preis: " />
+							<h:outputText value="#{event.price}" style="font-weight: bold" />
 						</h:panelGrid>
 					</p:outputPanel>
 
 					<h:panelGrid>
 						<h3>Tickets</h3>
 						<h:panelGrid columns="1" style="margin-bottom: 10px">
-							<p:inputText id="txt3" value="#{sliderView.number5}" />
+							<p:inputText id="txt3" value="#{sliderView}" />
 							<p:slider for="txt3" step="1" maxValue="10" />
 						</h:panelGrid>
-						<p:commandButton value="#{msg.buyTickets}" />
+						<p:commandButton value="#{msg.buyTickets}"
+								action="#{cartController.registerCart(event.eventID, event.designation, event.price, sliderView)}" />
 					</h:panelGrid>
 
 				</h:panelGrid>
+
+				<div class="ui-g" style="width: 100%"/>
+
 			</p:dataViewListItem>
+
 		</p:dataView>
 
 		<p:commandButton action="#{eventController.generateEvents()}"

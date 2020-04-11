@@ -8,7 +8,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	
+
 
 	<title>AStA-#{msg.shoppingCart}</title>
 	<link href="https://fonts.googleapis.com/css?family=Jura"
@@ -33,29 +33,38 @@
 			Warenkorb</span>
 	</div>
 	</header>
-	<div class="vertikal-flex">
-		<p:dataTable var="cart" value="#{cartController.Carts}">
-			<p:column headerText="Event_ID">
-				<h:outputText value="#{cart.eventID}" />
-			</p:column>
+	<h:form>
+		<div class="vertikal-flex">
+			<p:dataTable var="cart" value="#{cartController.allCarts}">
+				<p:column headerText="Event_ID">
+					<h:outputText value="#{cart.eventID}" />
+				</p:column>
 
-			<p:column headerText="Ticket Info">
-				<p:button outcome="allFeten" value="Veranstaltung ansehen">
-				</p:button>
-			</p:column>
-			<p:column headerText="Einzelpreis">
-				<h:outputText value="#{cart.unitPrice}" />
-			</p:column>
+				<p:column headerText="Ticket Info">
+					<p:button outcome="allFeten" value="Veranstaltung ansehen">
+					</p:button>
+				</p:column>
 
-			<p:column headerText="Menge">
-				<h:outputText value="#{cart.amount}" />
-			</p:column>
+				<p:column headerText="Beschreibung">
+					<h:outputText value="#{cart.eventDescription}" />
+				</p:column>
 
-			<p:column headerText="Gesamtpreis">
-				<h:outputText value="#{cart.totalPrice}" />
-			</p:column>
-		</p:dataTable>
-	</div>
-	<p:commandButton value="#{msg.pay}" action="payment.xhtml"/>
+				<p:column headerText="Einzelpreis">
+					<h:outputText value="#{cart.unitPrice}" />
+				</p:column>
+
+				<p:column headerText="Menge">
+					<h:outputText value="#{cart.amount}" />
+				</p:column>
+
+				<p:column headerText="Gesamtpreis">
+					<h:outputText value="#{cart.totalPrice}" />
+				</p:column>
+			</p:dataTable>
+		</div>
+		<p:commandButton action="#{cartController.generateCart()}"
+			value="#{msg.save}" ajax="false" />
+	</h:form>
+	<p:commandButton value="#{msg.pay}" action="payment.xhtml" />
 </h:body>
 </html>

@@ -73,6 +73,7 @@ public class EventController {
     newEvent.setDate(date);
     newEvent.setPlace(place);
     newEvent.setTime(time);
+    newEvent.setPrice(price);
     return newEvent;
   }
 
