@@ -40,7 +40,7 @@ public class Cart implements Serializable {
 	public Cart() {
 	}
 
-	public Cart(Integer eventID, String eventDescription, double unitPrice, int amount, double totalPrice) {
+	public Cart(Integer eventID, String eventDesignation, double unitPrice, int amount, double totalPrice) {
 
 		this.eventID = eventID;
 		this.eventDesignation = eventDesignation;

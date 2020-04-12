@@ -17,11 +17,11 @@
 		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
 
 	<style>
-		.ui-g {
-			background-color: lightgrey;
-			padding: 10px;
-		}
-	</style>
+.ui-g {
+	background-color: lightgrey;
+	padding: 10px;
+}
+</style>
 
 </h:head>
 <body>
@@ -37,7 +37,17 @@
 				style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
 		</div>
 	</header>
+
+
 	<h:form id="form">
+		<p:commandButton action="#{eventController.generateEvents()}"
+			value="#{msg.update}" ajax="false" />
+			
+		<p:growl id="growl" life="2000" />
+		<p:inputText id="filter" value="#{eventController.filterString}"></p:inputText>
+		<p:commandButton action="#{eventController.filterEvents()}"
+			value="#{msg.filter}" update="growl"></p:commandButton>
+			
 		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
@@ -73,25 +83,24 @@
 					</p:outputPanel>
 
 					<h:panelGrid>
+						<p:growl id="growl" />
 						<h3>Tickets</h3>
 						<h:panelGrid columns="1" style="margin-bottom: 10px">
 							<p:inputText id="txt3" value="#{sliderView}" />
 							<p:slider for="txt3" step="1" maxValue="10" />
 						</h:panelGrid>
 						<p:commandButton value="#{msg.buyTickets}"
-								action="#{cartController.registerCart(event.eventID, event.designation, event.price, sliderView)}" />
+							action="#{cartController.registerCart(event.eventID, event.designation, event.price, sliderView)}"
+							update="growl" />
 					</h:panelGrid>
 
 				</h:panelGrid>
 
-				<div class="ui-g" style="width: 100%"/>
+				<div class="ui-g" style="width: 100%" />
 
 			</p:dataViewListItem>
 
 		</p:dataView>
-
-		<p:commandButton action="#{eventController.generateEvents()}"
-			value="#{msg.save}" ajax="false" />
 	</h:form>
 </body>
 </html>

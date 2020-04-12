@@ -30,6 +30,9 @@ public class UserController {
   private List<User> allUser;
 
   private static User user;
+  
+  private String sortColumn;
+  private boolean sortAscending;
 
   public String deleteProfil() {
 
@@ -86,4 +89,22 @@ public class UserController {
   public User getUser() {
     return user;
   }
+
+public String getSortColumn() {
+	return sortColumn;
+}
+
+public void setSortColumn(String sortColumn) {
+	this.sortColumn = sortColumn;
+}
+
+public boolean isSortAscending() {
+	return sortAscending;
+}
+
+public void setSortAscending(boolean sortAscending) {
+	this.sortAscending = sortAscending;
+}
+  
+  
 }

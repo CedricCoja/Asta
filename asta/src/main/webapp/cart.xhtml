@@ -34,36 +34,30 @@
 	</div>
 	</header>
 	<h:form>
+		<p:commandButton action="#{cartController.generateCart()}"
+			value="#{msg.update}" ajax="false" />
 		<div class="vertikal-flex">
+
 			<p:dataTable var="cart" value="#{cartController.allCarts}">
-				<p:column headerText="#{msg.eventID}">
-					<h:outputText value="#{cart.eventID}" />
-				</p:column>
 
 				<p:column headerText="#{msg.ticketInfo}">
-					<p:button outcome="allFeten" value="Veranstaltung ansehen">
-					</p:button>
+					<p:commandButton value="#{cart.eventDesignation}"
+						action="#{eventController.redirectFete(cart.eventDesignation)}" ajax="false" update="growl"/>
 				</p:column>
 
-				<p:column headerText="#{msg.designation}">
-					<h:outputText value="#{cart.eventDesignation}" />
-				</p:column>
-
-				<p:column headerText="Einzelpreis">
+				<p:column headerText="#{msg.price}">
 					<h:outputText value="#{cart.unitPrice}" />
 				</p:column>
 
-				<p:column headerText="Menge">
+				<p:column headerText="#{msg.amount}">
 					<h:outputText value="#{cart.amount}" />
 				</p:column>
 
-				<p:column headerText="Gesamtpreis">
+				<p:column headerText="#{msg.totalPrice}">
 					<h:outputText value="#{cart.totalPrice}" />
 				</p:column>
 			</p:dataTable>
 		</div>
-		<p:commandButton action="#{cartController.generateCart()}"
-			value="#{msg.save}" ajax="false" />
 	</h:form>
 	<p:commandButton value="#{msg.pay}" action="payment.xhtml" />
 </h:body>
