@@ -29,8 +29,7 @@
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 	<div class="vertikal-flex">
 		<span class="w3-text-white w3-hide-small"
-			style="font-size: 100px; font-family: Amatic SC">Dein
-			Warenkorb</span>
+			style="font-size: 100px; font-family: Amatic SC">#{msg.yourCart}</span>
 	</div>
 	</header>
 	<h:form>
@@ -49,15 +48,15 @@
 					<h:outputText value="#{cart.eventDesignation}" />
 				</p:column>
 
-				<p:column headerText="Einzelpreis">
+				<p:column headerText="#{msg.singlePrice}">
 					<h:outputText value="#{cart.unitPrice}" />
 				</p:column>
 
-				<p:column headerText="Menge">
+				<p:column headerText="#{msg.amount}">
 					<h:outputText value="#{cart.amount}" />
 				</p:column>
 
-				<p:column headerText="Gesamtpreis">
+				<p:column headerText="#{msg.totalPrice}">
 					<h:outputText value="#{cart.totalPrice}" />
 				</p:column>
 			</p:dataTable>

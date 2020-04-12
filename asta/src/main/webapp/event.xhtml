@@ -1,112 +1,133 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-		xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
 
 
 <!-- <f:view locale="en"> -->
 <h:head>
-		<title>AStA-#{msg.register}</title>
-		<link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC" />
-		<!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
+	<title>AStA-#{msg.register}</title>
+	<link href="https://fonts.googleapis.com/css?family=Jura"
+		rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Raleway" />
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Amatic+SC" />
+	<!--  <link rel="stylesheet" href="resources/shop.css" type="text/css" /> -->
 </h:head>
 
 <h:body>
 
-		<div>
-				<ui:insert>
-						<ui:include src="/WEB-INF/headermenubar.xhtml" />
-				</ui:insert>
-		</div>
-		<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-				<div class="vertikal-flex">
-						<span class="w3-text-white w3-hide-small" style="font-size: 100px; font-family: Amatic SC">Profil</span>
-				</div>
-		</header>
-		<div>
-				<ui:insert>
-						<!-- <ui:include src="/WEB-INF/templates/headermenubar.xhtml" /> -->
-				</ui:insert>
-		</div>
+	<div>
+		<ui:insert>
+			<ui:include src="/WEB-INF/headermenubar.xhtml" />
+		</ui:insert>
+	</div>
+	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 		<div class="vertikal-flex">
-				<div id="content">
-						<ui:insert name="content">
-								<h:form id="form">
-										<p:panel id="panel" header="#{msg.eventData}">
-												<h:panelGrid columns="2">
-														<h:outputLabel value="#{msg.designation}" for="designation" />
-														<h:outputText value="#{event.designation}" />
-														<h:outputLabel value="#{msg.newDesignation}" />
-														<h:panelGroup>
-																<p:inputText id="designation" required="true" value="#{eventController.designation}" requiredMessage="Bezeichnung fehlt">
-																</p:inputText>
-																<h:message for="designation" styleClass="message" />
-														</h:panelGroup>
-
-														<h:outputLabel value="#{msg.description}" for="description" />
-														<h:outputText value="#{event.description}" />
-														<h:outputLabel value="#{msg.newDescription}" />
-														<h:panelGroup>
-																<p:inputText id="description" required="true" value="#{eventController.description}" requiredMessage="Beschreibung fehlt">
-																</p:inputText>
-																<h:message for="description" styleClass="message" />
-														</h:panelGroup>
-
-														<h:outputLabel value="#{msg.date}" for="date" />
-														<h:outputText value="#{event.date}" />
-														<h:outputLabel value="#{msg.newDate}" />
-														<h:panelGroup>
-																<p:calendar id="date" required="true" value="#{eventController.date}" requiredMessage="Datum fehlt" showOn="button" pattern="dd.MM.yyyy" />
-																<h:message for="date" styleClass="message" />
-														</h:panelGroup>
-
-														<h:outputLabel value="#{msg.time}" for="time" />
-														<h:outputText value="#{event.time}" />
-														<h:outputLabel value="#{msg.newTime}" />
-														<h:panelGroup>
-																<h:panelGroup>
-																		<p:inputText id="time" required="true" value="#{eventController.time}" requiredMessage="Ort fehlt">
-																		</p:inputText>
-																		<h:message for="time" styleClass="message" />
-																</h:panelGroup>
-
-																<h:outputLabel value="#{msg.place}" for="place" />
-																<h:outputText value="#{event.place}" />
-																<h:outputLabel value="#{msg.newPlace}" />
-																<h:panelGroup>
-																		<p:inputText id="place" required="true" value="#{eventController.place}" requiredMessage="Ort fehlt">
-																		</p:inputText>
-																		<h:message for="place" styleClass="message" />
-																</h:panelGroup>
-
-																<h:outputLabel value="#{msg.price}" for="price" />
-																<h:outputText value="#{event.Price}" />
-																<h:outputLabel value="#{msg.newPrice}" />
-																<h:panelGroup>
-																		<p:inputText id="price" required="true" value="#{eventController.price}" requiredMessage="Preis fehlt">
-																		</p:inputText>
-																		<h:message for="price" styleClass="message" />
-																</h:panelGroup>
-																<br></br>
-
-																<p:commandButton action="#{userController.saveProfil()}" value="#{msg.save}" ajax="false" />
-
-																<p:commandButton action="#{userController.deleteProfil()}" value="#{msg.delete}" ajax="false" />
-
-																<p:commandButton action="index.xhtml" value="#{msg.cancel}" update="@(form)" />
-										</p:panel>
-								</h:form>
-						</ui:insert>
-						<div class="push"></div>
-				</div>
+			<span class="w3-text-white w3-hide-small"
+				style="font-size: 100px; font-family: Amatic SC">#{msg.profile}</span>
 		</div>
-		<div>
-				<ui:insert>
-						<!-- <ui:include src="/WEB-INF/templates/footer.xhtml" /> -->
-				</ui:insert>
+	</header>
+	<div>
+		<ui:insert>
+			<!-- <ui:include src="/WEB-INF/templates/headermenubar.xhtml" /> -->
+		</ui:insert>
+	</div>
+	<div class="vertikal-flex">
+		<div id="content">
+			<ui:insert name="content">
+				<h:form id="form">
+					<p:panel id="panel" header="#{msg.eventData}">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{msg.designation}" for="designation" />
+							<h:outputText value="#{event.designation}" />
+							<h:outputLabel value="#{msg.newDesignation}" />
+							<h:panelGroup>
+								<p:inputText id="designation" required="true"
+									value="#{eventController.designation}"
+									requiredMessage="Bezeichnung fehlt">
+								</p:inputText>
+								<h:message for="designation" styleClass="message" />
+							</h:panelGroup>
+
+							<h:outputLabel value="#{msg.description}" for="description" />
+							<h:outputText value="#{event.description}" />
+							<h:outputLabel value="#{msg.newDescription}" />
+							<h:panelGroup>
+								<p:inputText id="description" required="true"
+									value="#{eventController.description}"
+									requiredMessage="Beschreibung fehlt">
+								</p:inputText>
+								<h:message for="description" styleClass="message" />
+							</h:panelGroup>
+
+							<h:outputLabel value="#{msg.date}" for="date" />
+							<h:outputText value="#{event.date}" />
+							<h:outputLabel value="#{msg.newDate}" />
+							<h:panelGroup>
+								<p:calendar id="date" required="true"
+									value="#{eventController.date}" requiredMessage="Datum fehlt"
+									showOn="button" pattern="dd.MM.yyyy" />
+								<h:message for="date" styleClass="message" />
+							</h:panelGroup>
+
+							<h:outputLabel value="#{msg.time}" for="time" />
+							<h:outputText value="#{event.time}" />
+							<h:outputLabel value="#{msg.newTime}" />
+								<h:panelGroup>
+									<p:inputText id="time" required="true"
+										value="#{eventController.time}" requiredMessage="Ort fehlt">
+									</p:inputText>
+									<h:message for="time" styleClass="message" />
+								</h:panelGroup>
+
+								<h:outputLabel value="#{msg.place}" for="place" />
+								<h:outputText value="#{event.place}" />
+								<h:outputLabel value="#{msg.newPlace}" />
+								<h:panelGroup>
+									<p:inputText id="place" required="true"
+										value="#{eventController.place}" requiredMessage="Ort fehlt">
+									</p:inputText>
+									<h:message for="place" styleClass="message" />
+								</h:panelGroup>
+
+								<h:outputLabel value="#{msg.price}" for="price" />
+								<h:outputText value="#{event.Price}" />
+								<h:outputLabel value="#{msg.newPrice}" />
+								<h:panelGroup>
+									<p:inputText id="price" required="true"
+										value="#{eventController.price}" requiredMessage="Preis fehlt">
+									</p:inputText>
+									<h:message for="price" styleClass="message" />
+								</h:panelGroup>
+								<br></br>
+
+								<p:commandButton action="#{userController.saveProfil()}"
+									value="#{msg.save}" ajax="false" />
+
+								<p:commandButton action="#{userController.deleteProfil()}"
+									value="#{msg.delete}" ajax="false" />
+
+								<p:commandButton action="index.xhtml" value="#{msg.cancel}"
+									update="@(form)" />
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</ui:insert>
+			<div class="push"></div>
 		</div>
+	</div>
+	<div>
+		<ui:insert>
+			<!-- <ui:include src="/WEB-INF/templates/footer.xhtml" /> -->
+		</ui:insert>
+	</div>
 </h:body>
 <!-- </f:view> -->
 </html>

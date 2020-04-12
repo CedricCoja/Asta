@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title>Feten - Tickets</title>
+	<title>#{msg.eventTickets}</title>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -26,7 +26,7 @@
 	<header class="bgimg w3-display-container w3-grayscale-min" id="home">
 		<div class="vertikal-flex">
 			<span class="w3-text-white w3-hide-small"
-				style="font-size: 100px; font-family: Amatic SC">Unsere Feten</span>
+				style="font-size: 100px; font-family: Amatic SC">#{allFeten}</span>
 		</div>
 	</header>
 	<h:form id="form">
@@ -53,7 +53,7 @@
 							<h:outputText value="#{msg.place}" />
 							<h:outputText value="#{event.place}" style="font-weight: bold" />
 
-							<h:outputText value=#{msg.date}:  />
+							<h:outputText value="#{msg.date}: " />
 							<h:outputText value="#{event.date}" style="font-weight: bold" />
 
 							<h:outputText value="#{msg.time}" />
@@ -74,12 +74,12 @@
 					</h:panelGrid>
 
 					<h:panelGrid>
-						<h3>Event löschen</h3>
+						<h3>#{deleteEvents}</h3>
 						<p:commandButton value="#{msg.delete}" />
 					</h:panelGrid>
 
 					<h:panelGrid>
-						<h3>Eventänderungen übernehmen</h3>
+						<h3>#{editEvent}</h3>
 						<p:commandButton value="#{msg.change}"/>
 					</h:panelGrid>
 				</h:panelGrid>
