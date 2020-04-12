@@ -15,87 +15,89 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TICKET")
 public class Cart implements Serializable {
-	private static final long serialVersionUID = 7719675659305229219L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "Cart_ID", nullable = false, unique = true)
-	private Integer cartID;
+  /* Die Klasse "Cart" speichert die Informationen über den Warenkorb in der Datenbank */
 
-	@Column(name = "Event_ID", nullable = false)
-	private Integer eventID;
+  private static final long serialVersionUID = 7719675659305229219L;
 
-	@Column(name = "Event_Description")
-	private String eventDesignation;
-	
-	@Column(name = "Einzelpreis")
-	private double unitPrice;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "Cart_ID", nullable = false, unique = true)
+  private Integer cartID;
 
-	@Column(name = "Anzahl")
-	private int amount;
-	
-	@Column(name = "Gesamtpreis")
-	private double totalPrice;
+  @Column(name = "Event_ID", nullable = false)
+  private Integer eventID;
 
-	public Cart() {
-	}
+  @Column(name = "Event_Description")
+  private String eventDesignation;
 
-	public Cart(Integer eventID, String eventDescription, double unitPrice, int amount, double totalPrice) {
+  @Column(name = "Einzelpreis")
+  private double unitPrice;
 
-		this.eventID = eventID;
-		this.eventDesignation = eventDesignation;
-		this.unitPrice = unitPrice;
-		this.amount = amount;
-		this.totalPrice = totalPrice;
-	}
+  @Column(name = "Anzahl")
+  private int amount;
 
-	public Integer getCartID() {
-		return cartID;
-	}
+  @Column(name = "Gesamtpreis")
+  private double totalPrice;
 
-	public void setCartID(Integer cartID) {
-		this.cartID = cartID;
-	}
+  public Cart() {
+  }
 
-	public Integer getEventID() {
-		return eventID;
-	}
+  public Cart(Integer eventID, String eventDesignation, double unitPrice, int amount, double totalPrice) {
 
-	public void setEventID(Integer eventID) {
-		this.eventID = eventID;
-	}
+    this.eventID = eventID;
+    this.eventDesignation = eventDesignation;
+    this.unitPrice = unitPrice;
+    this.amount = amount;
+    this.totalPrice = totalPrice;
+  }
 
-	
-	public String getEventDesignation() {
-		return eventDesignation;
-	}
+  public Integer getCartID() {
+    return cartID;
+  }
 
-	public void setEventDesignation(String eventDesignation) {
-		this.eventDesignation = eventDesignation;
-	}
+  public void setCartID(Integer cartID) {
+    this.cartID = cartID;
+  }
 
-	public double getUnitPrice() {
-		return unitPrice;
-	}
+  public Integer getEventID() {
+    return eventID;
+  }
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
-	}
+  public void setEventID(Integer eventID) {
+    this.eventID = eventID;
+  }
 
-	public int getAmount() {
-		return amount;
-	}
+  public String getEventDesignation() {
+    return eventDesignation;
+  }
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+  public void setEventDesignation(String eventDesignation) {
+    this.eventDesignation = eventDesignation;
+  }
 
-	public double getTotalPrice() {
-		return totalPrice;
-	}
+  public double getUnitPrice() {
+    return unitPrice;
+  }
 
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	
+  public void setUnitPrice(double unitPrice) {
+    this.unitPrice = unitPrice;
+  }
+
+  public int getAmount() {
+    return amount;
+  }
+
+  public void setAmount(int amount) {
+    this.amount = amount;
+  }
+
+  public double getTotalPrice() {
+    return totalPrice;
+  }
+
+  public void setTotalPrice(double totalPrice) {
+    this.totalPrice = totalPrice;
+  }
+
 }

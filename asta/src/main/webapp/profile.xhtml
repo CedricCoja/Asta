@@ -78,6 +78,17 @@
 								</p:inputText>
 								<h:message for="email" styleClass="message" />
 							</h:panelGroup>
+							
+							<h:outputLabel value="#{msg.password}" for="password" />
+							<h:outputText value="#{user.password}" />
+							<h:outputLabel value="#{msg.newPassword}" />
+							<h:panelGroup>
+								<p:inputText id="password" required="false"
+									requiredMessage="Passwort fehlt"
+									value="#{userController.user.password}">
+								</p:inputText>
+								<h:message for="password" styleClass="message" />
+							</h:panelGroup>
 						</h:panelGrid>
 						<br></br>
 

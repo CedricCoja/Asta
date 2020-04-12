@@ -12,12 +12,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 @NamedQuery(name = "SelectUser", query = "Select u from User u")
 @Entity
 @Table(name = "USER")
 public class User implements Serializable {
+
+  /* Die Klasse "User" speichert die Informationen über die Nutzer in der Datenbank */
 
   private static final long serialVersionUID = 4467006451749712622L;
 

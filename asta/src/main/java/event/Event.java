@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 @Table(name = "EVENT")
 public class Event implements Serializable {
 
+  /* Die Klasse "Event" speichert die Informationen über die Veranstaltungen in der Datenbank */
+
   private static final long serialVersionUID = 4031966842159109874L;
 
   @Id

@@ -15,11 +15,14 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
 
+import user.Role;
 import user.User;
 
 @ManagedBean
 @SessionScoped
 public class UserController {
+
+  /* Der Händler, der die Nutzer verwaltet */
 
   @PersistenceContext
   private EntityManager em;
@@ -30,6 +33,10 @@ public class UserController {
   private List<User> allUser;
 
   private static User user;
+
+  private String sortColumn;
+
+  private boolean sortAscending;
 
   public String deleteProfil() {
 
@@ -71,6 +78,14 @@ public class UserController {
     return "allUser";
   }
 
+  public boolean checkAdmin() {
+    if (user.getRole() == Role.ADMIN) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public List<User> getAllUser() {
     return allUser;
   }
@@ -85,5 +100,21 @@ public class UserController {
 
   public User getUser() {
     return user;
+  }
+
+  public String getSortColumn() {
+    return sortColumn;
+  }
+
+  public void setSortColumn(String sortColumn) {
+    this.sortColumn = sortColumn;
+  }
+
+  public boolean isSortAscending() {
+    return sortAscending;
+  }
+
+  public void setSortAscending(boolean sortAscending) {
+    this.sortAscending = sortAscending;
   }
 }

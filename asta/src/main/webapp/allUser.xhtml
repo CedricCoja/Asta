@@ -6,11 +6,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:t="http://myfaces.apache.org/tomahawk">
 <h:head>
 	<link rel="stylesheet" href="#{request.contextPath}/resources/home.css"
 		type="text/css" />
-			<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Raleway" />
 	<link rel="stylesheet"
@@ -39,39 +40,63 @@
 	</div>
 	</header>
 	<div class="vertikal-flex">
-	<div id="content">
-		<ui:insert name="content">
-				<p:dataTable var="user" value="#{userController.allUser}" headerClass="header">
-					<f:facet name="header">#{msg.user}<br/></f:facet>
-					<p:column headerText="#{msg.userID}">
+		<div id="content">
+			<ui:insert name="content">
+				<h:form>
+					<!-- 
+					<p:commandButton action="#{userController.generateUsers()}"
+						value="#{msg.update}" ajax="false" />
+
+					<t:dataTable value="#{userController.allUser}"
+						var="user" sortColumn="#{userController.sortColumn}"
+						sortAscending="#{userController.sortAscending}">
+
+						<t:column defaultSorted="true" sortable="true">
+							<f:facet name="header">
+								<h:outputText value="#{msg.userID}" />
+							</f:facet>
+							<h:outputText value="#{user.userID}" />
+						</t:column>
+
+						<t:column defaultSorted="true" sortable="true">
+							<f:facet name="header">
+								<h:outputText value="#{msg.firstName}" />
+							</f:facet>
+							<h:outputText value="#{user.firstName}" />
+						</t:column>
+					</t:dataTable>
+				</h:form>
+ -->
+			
+				<p:dataTable var="user" value="#{userController.allUser}"
+					headerClass="header">
+					<f:facet name="header">Nutzer</f:facet>
+					<p:column headerText="#{msg.userID}" sortBy="#{user.userID}" filterBy="#{user.userID}">
 						<h:outputText value="#{user.userID}" />
-					</p:column>
-					<p:column headerText="#{msg.firstName}">
+					</p:column>  
+
+					<p:column headerText="#{msg.firstName}" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
 						<h:outputText value="#{user.firstName}" />
 					</p:column>
-					<p:column headerText="#{msg.lastName}">
+					<p:column headerText="#{msg.lastName}" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
 						<h:outputText value="#{user.lastName}" />
 					</p:column>
-					<p:column headerText="#{msg.email}">
+					<p:column headerText="#{msg.email}" sortBy="#{user.email}" filterBy="#{user.email}">
 						<h:outputText value="#{user.email}" />
 					</p:column>
-					<p:column headerText="#{msg.password}">
+					<p:column headerText="#{msg.password}" sortBy="#{user.password}" filterBy="#{user.password}">
 						<h:outputText value="#{user.password}" />
 					</p:column>
-					<p:column headerText="#{msg.status}">
+					<p:column headerText="#{msg.status}" sortBy="#{user.status}" filterBy="#{user.status}">
 						<h:outputText value="#{user.status}" />
 					</p:column>
-					<p:column headerText="#{msg.role}">
+					<p:column headerText="#{msg.role}" sortBy="#{user.role}" filterBy="#{user.role}">
 						<h:outputText value="#{user.role}" />
 					</p:column>
 				</p:dataTable>
-
-		</ui:insert>
-		<h:form>
-				<p:commandButton action="#{userController.generateUsers()}"
-					value="#{msg.save}" ajax="false" />
-	</h:form>
-	</div>
+				</h:form>
+			</ui:insert>
+		</div>
 	</div>
 	<div id="footer">
 		<ui:insert name="footer">
