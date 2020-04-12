@@ -49,7 +49,7 @@
 							<h:panelGroup>
 								<p:inputText id="designation" required="false"
 									requiredMessage="#{msg.designation} fehlt"
-									value="#{eventController.changeEvent.designation}">
+									value="#{eventController.event.designation}">
 								</p:inputText>
 								<h:message for="designation" styleClass="message" />
 							</h:panelGroup>
@@ -60,35 +60,36 @@
 							<h:panelGroup>
 								<p:inputText id="description" required="false"
 									requiredMessage="#{msg.description} fehlt"
-									value="#{eventController.changeEvent.description}">
+									value="#{eventController.event.description}">
 								</p:inputText>
 								<h:message for="description" styleClass="message" />
 							</h:panelGroup>
 							
-							<h:outputLabel value="#{msg.place}" for="place" />
 							<h:outputText value="#{eventController.changeEvent.place}" />
 							<h:outputLabel value="#{msg.newPlace}" />
 							<h:panelGroup>
 								<p:inputText id="place" required="false"
 									requiredMessage="#{msg.place} fehlt"
-									value="#{eventController.changeEvent.place}">
+									value="#{eventController.event.place}">
 								</p:inputText>
 								<h:message for="place" styleClass="message" />
 							</h:panelGroup>
 						</h:panelGrid>
 						
+						<h:panelGrid>
 						<h:outputLabel value="#{msg.date}" for="date" />
 							<h:outputText value="#{eventController.changeEvent.date}" />
 							<h:outputLabel value="#{msg.newDate}" />
 							<h:panelGroup>
 								<p:inputText id="date" required="false"
 									requiredMessage="#{msg.date} fehlt"
-									value="#{eventController.changeEvent.date}">
+									value="#{eventController.event.date}">
 								</p:inputText>
 								<h:message for="date" styleClass="message" />
 							</h:panelGroup>
 						</h:panelGrid>
 						
+						<h:panelGrid>
 						<h:outputLabel value="#{msg.time}" for="time" />
 							<h:outputText value="#{eventController.changeEvent.time}" />
 							<h:outputLabel value="#{msg.newTime}" />
@@ -101,13 +102,14 @@
 							</h:panelGroup>
 						</h:panelGrid>
 						
+						<h:panelGrid>
 						<h:outputLabel value="#{msg.price}" for="price" />
-							<h:outputText value="#{eventController.changeEvent.price}" />
+							<h:outputText value="#{eventController.event.price}" />
 							<h:outputLabel value="#{msg.newPrice}" />
 							<h:panelGroup>
 								<p:inputText id="price" required="false"
 									requiredMessage="#{msg.price} fehlt"
-									value="#{eventController.changeEvent.price}">
+									value="#{eventController.event.price}">
 								</p:inputText>
 								<h:message for="price" styleClass="message" />
 							</h:panelGroup>
@@ -115,10 +117,10 @@
 						<br></br>
 
 						<p:commandButton 
-							value="#{msg.save}" />
+							value="#{msg.save}" action="eventController.saveEvent()" ajax="false"/>
 
 						<p:commandButton 
-							value="#{msg.delete}" />
+							value="#{msg.delete}" action="eventController.deleteEvent()" ajax="false"/>
 
 						<p:commandButton action="changeFeten.xhtml" value="#{msg.cancel}"
 							update="@(form)" />

@@ -16,6 +16,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
 import javax.validation.constraints.Size;
 
@@ -25,270 +27,272 @@ import event.Event;
 @SessionScoped
 public class EventController {
 
-	@PersistenceContext
-	private EntityManager em;
+  @PersistenceContext
+  private EntityManager em;
 
-	@Resource
-	private UserTransaction utx;
+  @Resource
+  private UserTransaction utx;
 
-	private DataModel<Event> events;
+  private DataModel<Event> events;
 
-	private List<Event> allEvents;
+  private List<Event> allEvents;
 
-	private String filterString;
+  private String filterString;
 
-	private List<Event> filteredEvents;
-	
-	private Event changeEvent;
+  private List<Event> filteredEvents;
 
-	@Size(min = 3, max = 20)
-	private String designation;
+  private Event changeEvent;
 
-	@Size(min = 3, max = 255)
-	private String description;
+  private Event event;
 
-	@Size(min = 3, max = 20)
-	private String place;
+  @Size(min = 3, max = 20)
+  private String designation;
 
-	@Temporal(TemporalType.DATE)
-	private Date date;
+  @Size(min = 3, max = 255)
+  private String description;
 
-	private String time;
+  @Size(min = 3, max = 20)
+  private String place;
 
-	private double price;
+  @Temporal(TemporalType.DATE)
+  private Date date;
 
-	public String registerEvent() {
-		try {
-			utx.begin();
-			Event newEvent = addEvent();
-			em.persist(newEvent);
-			utx.commit();
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null,
-					new FacesMessage("Das Event " + newEvent.getDesignation() + " wurde erfolgreich erstellt!"));
-			generateEvents();
-			return "newEvent";
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "newEvent";
-	}
+  private String time;
 
-	private Event addEvent() {
-		Event newEvent = new Event();
-		newEvent.setDescription(description);
-		newEvent.setDesignation(designation);
-		newEvent.setDate(date);
-		newEvent.setPlace(place);
-		newEvent.setTime(time);
-		newEvent.setPrice(price);
-		return newEvent;
-	}
+  private double price;
 
-	// public String deleteEvent() {
-	//
-	// try {
-	// event = getEvent();
-	// utx.begin();
-	// event = em.merge(event);
-	// em.remove(event);
-	// utx.commit();
-	// } catch (SecurityException | IllegalStateException |
-	// HeuristicRollbackException | HeuristicMixedException |
-	// javax.transaction.NotSupportedException | javax.transaction.SystemException |
-	// javax.transaction.RollbackException e) {
-	// e.printStackTrace();
-	// }
-	// FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-	// return "allFeten";
-	// }
-	//
-	// public String saveEvent() {
-	//
-	// try {
-	// event = getEvent();
-	// utx.begin();
-	// event = em.merge(event);
-	// utx.commit();
-	// } catch (SecurityException | IllegalStateException |
-	// HeuristicRollbackException | HeuristicMixedException |
-	// javax.transaction.NotSupportedException | javax.transaction.SystemException |
-	// javax.transaction.RollbackException e) {
-	// e.printStackTrace();
-	// }
-	// return "allFeten";
-	// }
+  public String registerEvent() {
+    try {
+      utx.begin();
+      Event newEvent = addEvent();
+      em.persist(newEvent);
+      utx.commit();
+      FacesContext context = FacesContext.getCurrentInstance();
+      context.addMessage(null, new FacesMessage("Das Event " + newEvent.getDesignation() + " wurde erfolgreich erstellt!"));
+      generateEvents();
+      return "newEvent";
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "newEvent";
+  }
 
-	@SuppressWarnings({ "unchecked" })
-	public String generateEvents() {
-		Query all = em.createQuery("select e from Event e");
+  private Event addEvent() {
+    Event newEvent = new Event();
+    newEvent.setDescription(description);
+    newEvent.setDesignation(designation);
+    newEvent.setDate(date);
+    newEvent.setPlace(place);
+    newEvent.setTime(time);
+    newEvent.setPrice(price);
+    return newEvent;
+  }
 
-		setAllEvents(all.getResultList());
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
+  public String deleteEvent() {
 
-		return "allFeten";
-	}
+    try {
+      event = getChangeEvent();
+      utx.begin();
+      event = em.merge(event);
+      em.remove(event);
+      utx.commit();
+    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+      e.printStackTrace();
+    }
+    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    return "changeFeten";
+  }
 
-	@SuppressWarnings("unchecked")
-	public String redirectFete(String fete) {
-		setFilterString(fete);
-		Query all = em.createQuery("select e from Event e");
+  public String saveEvent() {
 
-		setAllEvents(all.getResultList());
-		
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("filter " + filterString));
-		filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString))
-				.collect(Collectors.toList());
+    try {
+      event = getChangeEvent();
+      utx.begin();
+      event = em.merge(event);
+      utx.commit();
+    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
+      e.printStackTrace();
+    }
+    return "changeFeten";
+  }
 
-		setAllEvents(filteredEvents);
-		context.addMessage(null, new FacesMessage("nice " + allEvents.get(0).getDesignation()));
-		return "allFeten";
-	}
+  @SuppressWarnings({ "unchecked" })
+  public String generateEvents() {
+    Query all = em.createQuery("select e from Event e");
 
-	public String filterEvents() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("filter " + filterString));
+    setAllEvents(all.getResultList());
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
 
-		filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString))
-				.collect(Collectors.toList());
+    return "allFeten";
+  }
 
-		setAllEvents(filteredEvents);
+  @SuppressWarnings("unchecked")
+  public String redirectFete(String fete) {
+    setFilterString(fete);
+    Query all = em.createQuery("select e from Event e");
 
-		context.addMessage(null, new FacesMessage("f " + allEvents.get(0).getDesignation()));
+    setAllEvents(all.getResultList());
 
-		/*
-		 * for(Event e : allEvents) { if
-		 * (!e.getDesignation().toLowerCase().contains(filterString.toLowerCase())) {
-		 * allEvents.remove(e); } }
-		 */
-		return "allFeten?faces-redirect=true";
-	}
-	
-	public String saveChangeEvent(int eventID, String cDesignation, String cDescription, String cPlace, Date cDate, String cTime, double cPrice) {
-		changeEvent.setEventID(eventID);
-		changeEvent.setDate(cDate);
-		changeEvent.setDescription(cDescription);
-		changeEvent.setDesignation(cDesignation);
-		changeEvent.setPlace(cPlace);
-		changeEvent.setPrice(cPrice);
-		changeEvent.setTime(cTime);
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("übergabe " + changeEvent.getDesignation()));
-		return "modifyFete";
-	}
-	
-	@SuppressWarnings({ "unchecked" })
-	public String generateChangeEvents() {
-		Query all = em.createQuery("select e from Event e");
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage("filter " + filterString));
+    filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString)).collect(Collectors.toList());
 
-		setAllEvents(all.getResultList());
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
+    setAllEvents(filteredEvents);
+    context.addMessage(null, new FacesMessage("nice " + allEvents.get(0).getDesignation()));
+    return "allFeten";
+  }
 
-		return "changeFeten";
-	}
+  public String filterEvents() {
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage("filter " + filterString));
 
-	
-	public String filterChangeEvents() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage(null, new FacesMessage("filter " + filterString));
+    filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString)).collect(Collectors.toList());
 
-		filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString))
-				.collect(Collectors.toList());
+    setAllEvents(filteredEvents);
 
-		setAllEvents(filteredEvents);
+    context.addMessage(null, new FacesMessage("f " + allEvents.get(0).getDesignation()));
 
-		context.addMessage(null, new FacesMessage("f " + allEvents.get(0).getDesignation()));
-		return "changeFeten?faces-redirect=true";
-	}
+    /*
+     * for(Event e : allEvents) { if
+     * (!e.getDesignation().toLowerCase().contains(filterString.toLowerCase())) {
+     * allEvents.remove(e); } }
+     */
+    return "allFeten?faces-redirect=true";
+  }
 
-	public DataModel<Event> getEvents() {
-		return events;
-	}
+  public String saveChangeEvent(int eventID, String cDesignation, String cDescription, String cPlace, Date cDate, String cTime, double cPrice) {
+    changeEvent = new Event();
+    changeEvent.setEventID(eventID);
+    changeEvent.setDate(cDate);
+    changeEvent.setDescription(cDescription);
+    changeEvent.setDesignation(cDesignation);
+    changeEvent.setPlace(cPlace);
+    changeEvent.setPrice(cPrice);
+    changeEvent.setTime(cTime);
+    System.out.println(changeEvent.getTime());
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage("übergabe " + changeEvent.getDesignation()));
+    return "modifyFete";
+  }
 
-	public void setEvents(DataModel<Event> events) {
-		this.events = events;
-	}
+  @SuppressWarnings({ "unchecked" })
+  public String generateChangeEvents() {
+    Query all = em.createQuery("select e from Event e");
 
-	public List<Event> getAllEvents() {
-		return allEvents;
-	}
+    setAllEvents(all.getResultList());
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
 
-	public void setAllEvents(List<Event> allEvents) {
-		this.allEvents = allEvents;
-	}
+    return "changeFeten";
+  }
 
-	public String getDesignation() {
-		return designation;
-	}
+  public String filterChangeEvents() {
+    FacesContext context = FacesContext.getCurrentInstance();
+    context.addMessage(null, new FacesMessage("filter " + filterString));
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+    filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString)).collect(Collectors.toList());
 
-	public String getDescription() {
-		return description;
-	}
+    setAllEvents(filteredEvents);
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    context.addMessage(null, new FacesMessage("f " + allEvents.get(0).getDesignation()));
+    return "changeFeten?faces-redirect=true";
+  }
 
-	public String getPlace() {
-		return place;
-	}
+  public DataModel<Event> getEvents() {
+    return events;
+  }
 
-	public void setPlace(String place) {
-		this.place = place;
-	}
+  public void setEvents(DataModel<Event> events) {
+    this.events = events;
+  }
 
-	public Date getDate() {
-		return date;
-	}
+  public List<Event> getAllEvents() {
+    return allEvents;
+  }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+  public void setAllEvents(List<Event> allEvents) {
+    this.allEvents = allEvents;
+  }
 
-	public String getTime() {
-		return time;
-	}
+  public String getDesignation() {
+    return designation;
+  }
 
-	public void setTime(String time) {
-		this.time = time;
-	}
+  public void setDesignation(String designation) {
+    this.designation = designation;
+  }
 
-	public double getPrice() {
-		return price;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getFilterString() {
-		return filterString;
-	}
+  public String getPlace() {
+    return place;
+  }
 
-	public void setFilterString(String filterString) {
-		this.filterString = filterString;
-	}
+  public void setPlace(String place) {
+    this.place = place;
+  }
 
-	public List<Event> getFilteredEvents() {
-		return filteredEvents;
-	}
+  public Date getDate() {
+    return date;
+  }
 
-	public void setFilteredEvents(List<Event> filteredEvents) {
-		this.filteredEvents = filteredEvents;
-	}
+  public void setDate(Date date) {
+    this.date = date;
+  }
 
-	public Event getChangeEvent() {
-		return changeEvent;
-	}
+  public String getTime() {
+    return time;
+  }
 
-	public void setChangeEvent(Event changeEvent) {
-		this.changeEvent = changeEvent;
-	}
+  public void setTime(String time) {
+    this.time = time;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  public String getFilterString() {
+    return filterString;
+  }
+
+  public void setFilterString(String filterString) {
+    this.filterString = filterString;
+  }
+
+  public List<Event> getFilteredEvents() {
+    return filteredEvents;
+  }
+
+  public void setFilteredEvents(List<Event> filteredEvents) {
+    this.filteredEvents = filteredEvents;
+  }
+
+  public Event getChangeEvent() {
+    return changeEvent;
+  }
+
+  public void setChangeEvent(Event changeEvent) {
+    this.changeEvent = changeEvent;
+  }
+
+  public Event getEvent() {
+    return event;
+  }
+
+  public void setEvent(Event event) {
+    this.event = event;
+  }
+
 }
