@@ -27,6 +27,8 @@ import event.Event;
 @SessionScoped
 public class EventController {
 
+  /* Der Händler, der die Veranstelungen verwaltet */
+
   @PersistenceContext
   private EntityManager em;
 

@@ -13,6 +13,8 @@ import javax.faces.validator.ValidatorException;
 @FacesValidator(value = "emailValidator")
 public class EmailValidator implements Validator {
 
+  /* Validator, der prüft ob die angegebenen Mails valide sind. */
+
   public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
     String mail = String.valueOf(value);
     if (mail.length() != 0 && !mail.matches("^[^@]*@[^@.]*\\.[^@]*")) {

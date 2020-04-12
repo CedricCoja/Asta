@@ -21,6 +21,11 @@ import user.User;
 @SessionScoped
 public class IndexController {
 
+  /*
+   * Der Händler, der zu Beginn die Nutzer und Veranstaltungen erstellt,
+   * die von vorn herein in der Datenbank gespeichert werden sollen
+   */
+
   @PersistenceContext
   private EntityManager em;
   @Resource

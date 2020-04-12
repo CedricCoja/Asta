@@ -20,6 +20,8 @@ import user.User;
 @ManagedBean(name = "loginController")
 @SessionScoped
 public class LoginController {
+
+  /* Der Händler, der den Login eines Nutzers verwaltet. */
   private User user;
   private String email;
   private String password;

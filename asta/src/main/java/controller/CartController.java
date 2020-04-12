@@ -20,6 +20,8 @@ import cart.Cart;
 @SessionScoped
 public class CartController {
 
+  /* Der Händler, der den Warenkorb verwaltet */
+
   @PersistenceContext
   private EntityManager em;
 

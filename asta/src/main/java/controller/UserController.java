@@ -22,6 +22,8 @@ import user.User;
 @SessionScoped
 public class UserController {
 
+  /* Der Händler, der die Nutzer verwaltet */
+
   @PersistenceContext
   private EntityManager em;
 
