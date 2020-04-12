@@ -32,7 +32,8 @@
 					action="profile.xhtml" icon="pi pi-user" />
 				<p:menuitem value="#{msg.aboutUs} " action="ueberuns.xhtml"
 					icon="pi pi-bookmark" />
-				<p:menuitem value="#{msg.allUser}" rendered="#{userController.checkAdmin()}"  
+				
+				<p:menuitem value="#{msg.allUser}" rendered="#{not empty user and userController.user.role eq 'ADMIN'}"  
 					action="allUser.xhtml"/>
 				<f:facet name="options">
 					<p:commandButton rendered="#{not empty user}" value="#{msg.logout}"
