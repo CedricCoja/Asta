@@ -15,96 +15,108 @@ import javax.transaction.HeuristicMixedException;
 import javax.transaction.HeuristicRollbackException;
 import javax.transaction.UserTransaction;
 
+import user.Role;
 import user.User;
 
 @ManagedBean
 @SessionScoped
 public class UserController {
 
-  @PersistenceContext
-  private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-  @Resource
-  private UserTransaction utx;
+	@Resource
+	private UserTransaction utx;
 
-  private List<User> allUser;
+	private List<User> allUser;
 
-  private static User user;
-  
-  private String sortColumn;
-  private boolean sortAscending;
+	private static User user;
 
-  public String deleteProfil() {
+	private String sortColumn;
 
-    try {
-      user = getUser();
-      utx.begin();
-      user = em.merge(user);
-      em.remove(user);
-      utx.commit();
-    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
-      e.printStackTrace();
-    }
-    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    return "/index.xhtml?faces-redirect=true";
-  }
+	private boolean sortAscending;
 
-  public String saveProfil() {
+	public String deleteProfil() {
 
-    try {
-      user = getUser();
-      user.setPassword(RegisterController.bcryptHash(user.getPassword()));
-      utx.begin();
-      user = em.merge(user);
-      utx.commit();
-    } catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException | javax.transaction.NotSupportedException | javax.transaction.SystemException | javax.transaction.RollbackException e) {
-      e.printStackTrace();
-    }
-    return "profile";
-  }
+		try {
+			user = getUser();
+			utx.begin();
+			user = em.merge(user);
+			em.remove(user);
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException
+				| javax.transaction.NotSupportedException | javax.transaction.SystemException
+				| javax.transaction.RollbackException e) {
+			e.printStackTrace();
+		}
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/index.xhtml?faces-redirect=true";
+	}
 
-  @SuppressWarnings({ "unchecked" })
-  public String generateUsers() {
-    Query all = em.createQuery("select u from User u");
+	public String saveProfil() {
 
-    setAllUser(all.getResultList());
-    FacesContext context = FacesContext.getCurrentInstance();
-    context.addMessage(null, new FacesMessage("In der Tabelle sehen Sie " + "alle registrierten Nutzer."));
+		try {
+			user = getUser();
+			user.setPassword(RegisterController.bcryptHash(user.getPassword()));
+			utx.begin();
+			user = em.merge(user);
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | HeuristicRollbackException | HeuristicMixedException
+				| javax.transaction.NotSupportedException | javax.transaction.SystemException
+				| javax.transaction.RollbackException e) {
+			e.printStackTrace();
+		}
+		return "profile";
+	}
 
-    return "allUser";
-  }
+	@SuppressWarnings({ "unchecked" })
+	public String generateUsers() {
+		Query all = em.createQuery("select u from User u");
 
-  public List<User> getAllUser() {
-    return allUser;
-  }
+		setAllUser(all.getResultList());
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("In der Tabelle sehen Sie " + "alle registrierten Nutzer."));
 
-  public void setAllUser(List<User> allUser) {
-    this.allUser = allUser;
-  }
+		return "allUser";
+	}
 
-  public static void setUser(User login) {
-    user = login;
-  }
+	public boolean checkAdmin() {
+		if (user.getRole().toString().contains("Administrator")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-  public User getUser() {
-    return user;
-  }
+	public List<User> getAllUser() {
+		return allUser;
+	}
 
-public String getSortColumn() {
-	return sortColumn;
-}
+	public void setAllUser(List<User> allUser) {
+		this.allUser = allUser;
+	}
 
-public void setSortColumn(String sortColumn) {
-	this.sortColumn = sortColumn;
-}
+	public static void setUser(User login) {
+		user = login;
+	}
 
-public boolean isSortAscending() {
-	return sortAscending;
-}
+	public User getUser() {
+		return user;
+	}
 
-public void setSortAscending(boolean sortAscending) {
-	this.sortAscending = sortAscending;
-}
-  
-  
+	public String getSortColumn() {
+		return sortColumn;
+	}
+
+	public void setSortColumn(String sortColumn) {
+		this.sortColumn = sortColumn;
+	}
+
+	public boolean isSortAscending() {
+		return sortAscending;
+	}
+
+	public void setSortAscending(boolean sortAscending) {
+		this.sortAscending = sortAscending;
+	}
 }

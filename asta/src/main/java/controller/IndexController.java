@@ -64,7 +64,7 @@ public class IndexController {
 		return "allFeten";
 	}
 
-	public String aboutUs() {
-		return "ueberuns";
+	public String home() {
+		return "home";
 	}
 }

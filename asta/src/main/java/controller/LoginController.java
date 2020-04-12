@@ -15,6 +15,7 @@ import javax.persistence.Query;
 import javax.transaction.UserTransaction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import user.Role;
 import user.User;
 
 @ManagedBean(name = "loginController")
@@ -51,6 +52,7 @@ public class LoginController {
 			context.addMessage(null, new FacesMessage("SUCCESS", "pw: " + test_pw));
 			
 			if (users.size() == 1) {
+				
 				user = users.get(0);
 				firstName = user.getFirstName();
 				setUserID(user.getUserID());
@@ -123,4 +125,19 @@ public class LoginController {
 		this.userID = userID;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getTest_pw() {
+		return test_pw;
+	}
+
+	public void setTest_pw(String test_pw) {
+		this.test_pw = test_pw;
+	}
 }

@@ -17,8 +17,8 @@
 						<!--      style="float:right;" -->
 						<p:menubar>
 								<f:facet name="options">
-										<p:commandButton rendered="#{empty user}" value="#{msg.start}" action="#{indexController.events()}" icon="pi pi-list" />
-										<p:commandButton rendered="#{empty user}" value="#{msg.myEvents}" action="#{indexController.aboutUs()}" icon="pi pi-list" />
+										<p:commandButton rendered="#{empty user}" value="#{msg.start}" action="#{indexController.home()}" icon="pi pi-list" />
+										<p:commandButton rendered="#{empty user}" value="#{msg.myEvents}" action="#{indexController.events()}" icon="pi pi-list" />
 										<p:commandButton rendered="#{empty user}" value="#{msg.login}" action="#{indexController.login()}" icon="pi pi-sign-in" />
 										<p:commandButton rendered="#{empty user}" value="#{msg.register}" action="#{indexController.register()}" icon="pi pi-user-plus" />
 								</f:facet>

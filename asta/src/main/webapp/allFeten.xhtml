@@ -42,19 +42,19 @@
 	<h:form id="form">
 		<p:commandButton action="#{eventController.generateEvents()}"
 			value="#{msg.update}" ajax="false" />
-			
+
 		<p:growl id="growl" life="2000" />
 		<p:inputText id="filter" value="#{eventController.filterString}"></p:inputText>
 		<p:commandButton action="#{eventController.filterEvents()}"
 			value="#{msg.filter}" update="growl"></p:commandButton>
-			
+
 		<p:dataView var="event" value="#{eventController.allEvents}"
 			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
 
 			<p:dataViewListItem>
 				<h:panelGrid columns="3" style="width:100%"
-					columnClasses="ui-grid-col-3, ui-grid-col-4, ui-grid-col-2">
+					columnClasses="ui-grid-col-4, ui-grid-col-4, ui-grid-col-2">
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="#{msg.eventID}: " />
@@ -67,7 +67,10 @@
 							<h:outputText value="#{msg.description}: " />
 							<h:outputText value="#{event.description}"
 								style="font-weight: bold" />
-
+						</h:panelGrid>
+					</p:outputPanel>
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
 							<h:outputText value="#{msg.place}: " />
 							<h:outputText value="#{event.place}" style="font-weight: bold" />
 
@@ -84,7 +87,7 @@
 
 					<h:panelGrid>
 						<p:growl id="growl" />
-						<h3>Tickets</h3>
+						<p:outputLabel value="#{msg.ticket}"></p:outputLabel>
 						<h:panelGrid columns="1" style="margin-bottom: 10px">
 							<p:inputText id="txt3" value="#{sliderView}" />
 							<p:slider for="txt3" step="1" maxValue="10" />

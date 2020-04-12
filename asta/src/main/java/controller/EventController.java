@@ -38,6 +38,8 @@ public class EventController {
 	private String filterString;
 
 	private List<Event> filteredEvents;
+	
+	private Event changeEvent;
 
 	@Size(min = 3, max = 20)
 	private String designation;
@@ -163,6 +165,44 @@ public class EventController {
 		 */
 		return "allFeten?faces-redirect=true";
 	}
+	
+	public String saveChangeEvent(int eventID, String cDesignation, String cDescription, String cPlace, Date cDate, String cTime, double cPrice) {
+		changeEvent.setEventID(eventID);
+		changeEvent.setDate(cDate);
+		changeEvent.setDescription(cDescription);
+		changeEvent.setDesignation(cDesignation);
+		changeEvent.setPlace(cPlace);
+		changeEvent.setPrice(cPrice);
+		changeEvent.setTime(cTime);
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("übergabe " + changeEvent.getDesignation()));
+		return "modifyFete";
+	}
+	
+	@SuppressWarnings({ "unchecked" })
+	public String generateChangeEvents() {
+		Query all = em.createQuery("select e from Event e");
+
+		setAllEvents(all.getResultList());
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage(allEvents.get(0).getPlace()));
+
+		return "changeFeten";
+	}
+
+	
+	public String filterChangeEvents() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(null, new FacesMessage("filter " + filterString));
+
+		filteredEvents = allEvents.stream().filter(Event -> Event.getDesignation().contains(filterString))
+				.collect(Collectors.toList());
+
+		setAllEvents(filteredEvents);
+
+		context.addMessage(null, new FacesMessage("f " + allEvents.get(0).getDesignation()));
+		return "changeFeten?faces-redirect=true";
+	}
 
 	public DataModel<Event> getEvents() {
 		return events;
@@ -244,4 +284,11 @@ public class EventController {
 		this.filteredEvents = filteredEvents;
 	}
 
+	public Event getChangeEvent() {
+		return changeEvent;
+	}
+
+	public void setChangeEvent(Event changeEvent) {
+		this.changeEvent = changeEvent;
+	}
 }
